@@ -1,0 +1,2241 @@
+Array
+(
+    [Request] =&gt; Array
+        (
+            [authentication] =&gt; true
+            [key] =&gt; Array
+                (
+                )
+
+            [method] =&gt; Array
+                (
+                )
+
+        )
+
+    [book] =&gt; Array
+        (
+            [id] =&gt; 17713454
+            [title] =&gt; Chuyện ở Nông trại
+            [isbn] =&gt; Array
+                (
+                )
+
+            [isbn13] =&gt; Array
+                (
+                )
+
+            [asin] =&gt; Array
+                (
+                )
+
+            [kindle_asin] =&gt; Array
+                (
+                )
+
+            [marketplace_id] =&gt; Array
+                (
+                )
+
+            [country_code] =&gt; Array
+                (
+                )
+
+            [image_url] =&gt; https://images.gr-assets.com/books/1364821448m/17713454.jpg
+            [small_image_url] =&gt; https://images.gr-assets.com/books/1364821448s/17713454.jpg
+            [publication_year] =&gt; 2013
+            [publication_month] =&gt; 3
+            [publication_day] =&gt; 1
+            [publisher] =&gt; Nhã Nam &amp; NXB Hội Nhà Văn
+            [language_code] =&gt; vie
+            [is_ebook] =&gt; false
+            [description] =&gt; Array
+                (
+                )
+
+            [work] =&gt; Array
+                (
+                    [id] =&gt; 2207778
+                    [books_count] =&gt; 837
+                    [best_book_id] =&gt; 7613
+                    [reviews_count] =&gt; 2511231
+                    [ratings_sum] =&gt; 7411804
+                    [ratings_count] =&gt; 1918918
+                    [text_reviews_count] =&gt; 33478
+                    [original_publication_year] =&gt; 1945
+                    [original_publication_month] =&gt; 8
+                    [original_publication_day] =&gt; Array
+                        (
+                            [@attributes] =&gt; Array
+                                (
+                                    [type] =&gt; integer
+                                    [nil] =&gt; true
+                                )
+
+                        )
+
+                    [original_title] =&gt; Animal Farm: A Fairy Story
+                    [original_language_id] =&gt; Array
+                        (
+                            [@attributes] =&gt; Array
+                                (
+                                    [type] =&gt; integer
+                                    [nil] =&gt; true
+                                )
+
+                        )
+
+                    [media_type] =&gt; book
+                    [rating_dist] =&gt; 5:621607|4:675724|3:423247|2:132792|1:65548|total:1918918
+                    [desc_user_id] =&gt; 17406605
+                    [default_chaptering_book_id] =&gt; Array
+                        (
+                            [@attributes] =&gt; Array
+                                (
+                                    [type] =&gt; integer
+                                    [nil] =&gt; true
+                                )
+
+                        )
+
+                    [default_description_language_code] =&gt; Array
+                        (
+                            [@attributes] =&gt; Array
+                                (
+                                    [nil] =&gt; true
+                                )
+
+                        )
+
+                )
+
+            [average_rating] =&gt; 3.86
+            [num_pages] =&gt; Array
+                (
+                )
+
+            [format] =&gt; Array
+                (
+                )
+
+            [edition_information] =&gt; Array
+                (
+                )
+
+            [ratings_count] =&gt; Array
+                (
+                )
+
+            [text_reviews_count] =&gt; Array
+                (
+                )
+
+            [url] =&gt; Array
+                (
+                )
+
+            [link] =&gt; Array
+                (
+                )
+
+            [authors] =&gt; Array
+                (
+                    [author] =&gt; Array
+                        (
+                            [0] =&gt; Array
+                                (
+                                    [id] =&gt; 3706
+                                    [name] =&gt; George Orwell
+                                    [role] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                            [@attributes] =&gt; Array
+                                                (
+                                                    [nophoto] =&gt; false
+                                                )
+
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                            [@attributes] =&gt; Array
+                                                (
+                                                    [nophoto] =&gt; false
+                                                )
+
+                                        )
+
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [average_rating] =&gt; 4.01
+                                    [ratings_count] =&gt; 4126907
+                                    [text_reviews_count] =&gt; 86639
+                                )
+
+                            [1] =&gt; Array
+                                (
+                                    [id] =&gt; 5874062
+                                    [name] =&gt; An Lý
+                                    [role] =&gt; Translator
+                                    [image_url] =&gt; Array
+                                        (
+                                            [@attributes] =&gt; Array
+                                                (
+                                                    [nophoto] =&gt; true
+                                                )
+
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                            [@attributes] =&gt; Array
+                                                (
+                                                    [nophoto] =&gt; true
+                                                )
+
+                                        )
+
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [average_rating] =&gt; 4.14
+                                    [ratings_count] =&gt; 298
+                                    [text_reviews_count] =&gt; 65
+                                )
+
+                        )
+
+                )
+
+            [reviews_widget] =&gt; Array
+                (
+                )
+
+            [popular_shelves] =&gt; Array
+                (
+                    [shelf] =&gt; Array
+                        (
+                            [0] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; literature
+                                            [count] =&gt; 2095
+                                        )
+
+                                )
+
+                            [1] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; fantasy
+                                            [count] =&gt; 2065
+                                        )
+
+                                )
+
+                            [2] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; to-read
+                                            [count] =&gt; 1957
+                                        )
+
+                                )
+
+                            [3] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; school
+                                            [count] =&gt; 1774
+                                        )
+
+                                )
+
+                            [4] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; dystopian
+                                            [count] =&gt; 1761
+                                        )
+
+                                )
+
+                            [5] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; politics
+                                            [count] =&gt; 1696
+                                        )
+
+                                )
+
+                            [6] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; clàssics
+                                            [count] =&gt; 1390
+                                        )
+
+                                )
+
+                            [7] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; science-fiction
+                                            [count] =&gt; 1322
+                                        )
+
+                                )
+
+                            [8] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; novels
+                                            [count] =&gt; 1155
+                                        )
+
+                                )
+
+                            [9] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; satire
+                                            [count] =&gt; 1006
+                                        )
+
+                                )
+
+                            [10] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; favourites
+                                            [count] =&gt; 1003
+                                        )
+
+                                )
+
+                            [11] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; read-for-school
+                                            [count] =&gt; 796
+                                        )
+
+                                )
+
+                            [12] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; sci-fi
+                                            [count] =&gt; 757
+                                        )
+
+                                )
+
+                            [13] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; political
+                                            [count] =&gt; 670
+                                        )
+
+                                )
+
+                            [14] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; animals
+                                            [count] =&gt; 633
+                                        )
+
+                                )
+
+                            [15] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; english
+                                            [count] =&gt; 626
+                                        )
+
+                                )
+
+                            [16] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; novel
+                                            [count] =&gt; 605
+                                        )
+
+                                )
+
+                            [17] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; philosophy
+                                            [count] =&gt; 603
+                                        )
+
+                                )
+
+                            [18] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; school-books
+                                            [count] =&gt; 573
+                                        )
+
+                                )
+
+                            [19] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; high-school
+                                            [count] =&gt; 555
+                                        )
+
+                                )
+
+                            [20] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; 1001-books
+                                            [count] =&gt; 546
+                                        )
+
+                                )
+
+                            [21] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; to-buy
+                                            [count] =&gt; 544
+                                        )
+
+                                )
+
+                            [22] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; for-school
+                                            [count] =&gt; 529
+                                        )
+
+                                )
+
+                            [23] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; classic-literature
+                                            [count] =&gt; 497
+                                        )
+
+                                )
+
+                            [24] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; adult
+                                            [count] =&gt; 489
+                                        )
+
+                                )
+
+                            [25] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; british
+                                            [count] =&gt; 479
+                                        )
+
+                                )
+
+                            [26] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; young-adult
+                                            [count] =&gt; 454
+                                        )
+
+                                )
+
+                            [27] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; 20th-century
+                                            [count] =&gt; 445
+                                        )
+
+                                )
+
+                            [28] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; modern-classics
+                                            [count] =&gt; 425
+                                        )
+
+                                )
+
+                            [29] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; library
+                                            [count] =&gt; 414
+                                        )
+
+                                )
+
+                            [30] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; re-read
+                                            [count] =&gt; 405
+                                        )
+
+                                )
+
+                            [31] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; default
+                                            [count] =&gt; 370
+                                        )
+
+                                )
+
+                            [32] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; adult-fiction
+                                            [count] =&gt; 363
+                                        )
+
+                                )
+
+                            [33] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; british-literature
+                                            [count] =&gt; 339
+                                        )
+
+                                )
+
+                            [34] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; 1001
+                                            [count] =&gt; 323
+                                        )
+
+                                )
+
+                            [35] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; historical-fiction
+                                            [count] =&gt; 319
+                                        )
+
+                                )
+
+                            [36] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; literary-fiction
+                                            [count] =&gt; 311
+                                        )
+
+                                )
+
+                            [37] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; general-fiction
+                                            [count] =&gt; 297
+                                        )
+
+                                )
+
+                            [38] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; allegory
+                                            [count] =&gt; 296
+                                        )
+
+                                )
+
+                            [39] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; classic-fiction
+                                            [count] =&gt; 292
+                                        )
+
+                                )
+
+                            [40] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; to-re-read
+                                            [count] =&gt; 285
+                                        )
+
+                                )
+
+                            [41] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; classics-to-read
+                                            [count] =&gt; 271
+                                        )
+
+                                )
+
+                            [42] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; english-literature
+                                            [count] =&gt; 269
+                                        )
+
+                                )
+
+                            [43] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; books
+                                            [count] =&gt; 267
+                                        )
+
+                                )
+
+                            [44] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; my-books
+                                            [count] =&gt; 266
+                                        )
+
+                                )
+
+                            [45] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; read-in-2015
+                                            [count] =&gt; 264
+                                        )
+
+                                )
+
+                            [46] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; audiobook
+                                            [count] =&gt; 261
+                                        )
+
+                                )
+
+                            [47] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; kindle
+                                            [count] =&gt; 255
+                                        )
+
+                                )
+
+                            [48] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; روايات
+                                            [count] =&gt; 254
+                                        )
+
+                                )
+
+                            [49] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; audiobooks
+                                            [count] =&gt; 251
+                                        )
+
+                                )
+
+                            [50] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; school-reads
+                                            [count] =&gt; 250
+                                        )
+
+                                )
+
+                            [51] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; literary
+                                            [count] =&gt; 247
+                                        )
+
+                                )
+
+                            [52] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; read-in-school
+                                            [count] =&gt; 243
+                                        )
+
+                                )
+
+                            [53] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; banned-books
+                                            [count] =&gt; 236
+                                        )
+
+                                )
+
+                            [54] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; classic-lit
+                                            [count] =&gt; 236
+                                        )
+
+                                )
+
+                            [55] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; read-in-2016
+                                            [count] =&gt; 229
+                                        )
+
+                                )
+
+                            [56] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; history
+                                            [count] =&gt; 225
+                                        )
+
+                                )
+
+                            [57] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; read-in-english
+                                            [count] =&gt; 218
+                                        )
+
+                                )
+
+                            [58] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; 1001-books-to-read-before-you-die
+                                            [count] =&gt; 217
+                                        )
+
+                                )
+
+                            [59] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; i-own
+                                            [count] =&gt; 208
+                                        )
+
+                                )
+
+                            [60] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; sci-fi-fantasy
+                                            [count] =&gt; 205
+                                        )
+
+                                )
+
+                            [61] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; historical
+                                            [count] =&gt; 203
+                                        )
+
+                                )
+
+                            [62] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; favorite
+                                            [count] =&gt; 202
+                                        )
+
+                                )
+
+                            [63] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; school-reading
+                                            [count] =&gt; 200
+                                        )
+
+                                )
+
+                            [64] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; read-in-2014
+                                            [count] =&gt; 199
+                                        )
+
+                                )
+
+                            [65] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; favorite-books
+                                            [count] =&gt; 195
+                                        )
+
+                                )
+
+                            [66] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; ebook
+                                            [count] =&gt; 187
+                                        )
+
+                                )
+
+                            [67] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; social-commentary
+                                            [count] =&gt; 180
+                                        )
+
+                                )
+
+                            [68] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; required-reading
+                                            [count] =&gt; 175
+                                        )
+
+                                )
+
+                            [69] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; must-read
+                                            [count] =&gt; 172
+                                        )
+
+                                )
+
+                            [70] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; borrowed
+                                            [count] =&gt; 171
+                                        )
+
+                                )
+
+                            [71] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; the-classics
+                                            [count] =&gt; 171
+                                        )
+
+                                )
+
+                            [72] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; wish-list
+                                            [count] =&gt; 168
+                                        )
+
+                                )
+
+                            [73] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; novella
+                                            [count] =&gt; 168
+                                        )
+
+                                )
+
+                            [74] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; communism
+                                            [count] =&gt; 167
+                                        )
+
+                                )
+
+                            [75] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; drama
+                                            [count] =&gt; 167
+                                        )
+
+                                )
+
+                            [76] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; book-club
+                                            [count] =&gt; 166
+                                        )
+
+                                )
+
+                            [77] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; to-reread
+                                            [count] =&gt; 162
+                                        )
+
+                                )
+
+                            [78] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; orwell
+                                            [count] =&gt; 160
+                                        )
+
+                                )
+
+                            [79] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; all-time-favorites
+                                            [count] =&gt; 159
+                                        )
+
+                                )
+
+                            [80] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; currently-reading
+                                            [count] =&gt; 156
+                                        )
+
+                                )
+
+                            [81] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; lit
+                                            [count] =&gt; 156
+                                        )
+
+                                )
+
+                            [82] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; finished
+                                            [count] =&gt; 154
+                                        )
+
+                                )
+
+                            [83] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; reread
+                                            [count] =&gt; 149
+                                        )
+
+                                )
+
+                            [84] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; to-read-classics
+                                            [count] =&gt; 148
+                                        )
+
+                                )
+
+                            [85] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; ya
+                                            [count] =&gt; 148
+                                        )
+
+                                )
+
+                            [86] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; read-in-2013
+                                            [count] =&gt; 144
+                                        )
+
+                                )
+
+                            [87] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; ebooks
+                                            [count] =&gt; 144
+                                        )
+
+                                )
+
+                            [88] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; audio
+                                            [count] =&gt; 143
+                                        )
+
+                                )
+
+                            [89] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; 5-stars
+                                            [count] =&gt; 143
+                                        )
+
+                                )
+
+                            [90] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; thought-provoking
+                                            [count] =&gt; 138
+                                        )
+
+                                )
+
+                            [91] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; childhood
+                                            [count] =&gt; 131
+                                        )
+
+                                )
+
+                            [92] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; own-it
+                                            [count] =&gt; 128
+                                        )
+
+                                )
+
+                            [93] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; read-again
+                                            [count] =&gt; 128
+                                        )
+
+                                )
+
+                            [94] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; scifi
+                                            [count] =&gt; 128
+                                        )
+
+                                )
+
+                            [95] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; other
+                                            [count] =&gt; 127
+                                        )
+
+                                )
+
+                            [96] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; to-read-again
+                                            [count] =&gt; 126
+                                        )
+
+                                )
+
+                            [97] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; speculative-fiction
+                                            [count] =&gt; 123
+                                        )
+
+                                )
+
+                            [98] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; 1940s
+                                            [count] =&gt; 122
+                                        )
+
+                                )
+
+                            [99] =&gt; Array
+                                (
+                                    [@attributes] =&gt; Array
+                                        (
+                                            [name] =&gt; dystopian-fiction
+                                            [count] =&gt; 119
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [book_links] =&gt; Array
+                (
+                    [book_link] =&gt; Array
+                        (
+                            [id] =&gt; 8
+                            [name] =&gt; Libraries
+                            [link] =&gt; https://www.goodreads.com/book_link/follow/8
+                        )
+
+                )
+
+            [buy_links] =&gt; Array
+                (
+                    [buy_link] =&gt; Array
+                        (
+                            [0] =&gt; Array
+                                (
+                                    [id] =&gt; 1
+                                    [name] =&gt; Amazon
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/1
+                                )
+
+                            [1] =&gt; Array
+                                (
+                                    [id] =&gt; 10
+                                    [name] =&gt; Audible
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/10
+                                )
+
+                            [2] =&gt; Array
+                                (
+                                    [id] =&gt; 3
+                                    [name] =&gt; Barnes &amp; Noble
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/3
+                                )
+
+                            [3] =&gt; Array
+                                (
+                                    [id] =&gt; 1027
+                                    [name] =&gt; Kobo
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/1027
+                                )
+
+                            [4] =&gt; Array
+                                (
+                                    [id] =&gt; 2102
+                                    [name] =&gt; Apple iBooks
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/2102
+                                )
+
+                            [5] =&gt; Array
+                                (
+                                    [id] =&gt; 8036
+                                    [name] =&gt; Google Play
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/8036
+                                )
+
+                            [6] =&gt; Array
+                                (
+                                    [id] =&gt; 4
+                                    [name] =&gt; Abebooks
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/4
+                                )
+
+                            [7] =&gt; Array
+                                (
+                                    [id] =&gt; 882
+                                    [name] =&gt; Book Depository
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/882
+                                )
+
+                            [8] =&gt; Array
+                                (
+                                    [id] =&gt; 9
+                                    [name] =&gt; Indigo
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/9
+                                )
+
+                            [9] =&gt; Array
+                                (
+                                    [id] =&gt; 2
+                                    [name] =&gt; Half.com
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/2
+                                )
+
+                            [10] =&gt; Array
+                                (
+                                    [id] =&gt; 5
+                                    [name] =&gt; Alibris
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/5
+                                )
+
+                            [11] =&gt; Array
+                                (
+                                    [id] =&gt; 107
+                                    [name] =&gt; Better World Books
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/107
+                                )
+
+                            [12] =&gt; Array
+                                (
+                                    [id] =&gt; 7
+                                    [name] =&gt; IndieBound
+                                    [link] =&gt; https://www.goodreads.com/book_link/follow/7
+                                )
+
+                        )
+
+                )
+
+            [series_works] =&gt; Array
+                (
+                    [0] =&gt; 
+    
+  
+                )
+
+            [similar_books] =&gt; Array
+                (
+                    [book] =&gt; Array
+                        (
+                            [0] =&gt; Array
+                                (
+                                    [id] =&gt; 13020
+                                    [title] =&gt; Array
+                                        (
+                                        )
+
+                                    [title_without_series] =&gt; King Henry IV, Part 1
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 398
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 3335240
+                                        )
+
+                                    [isbn] =&gt; 1904271359
+                                    [isbn13] =&gt; 9781904271352
+                                    [average_rating] =&gt; 3.80
+                                    [ratings_count] =&gt; 18148
+                                    [publication_year] =&gt; 2002
+                                    [publication_month] =&gt; 11
+                                    [publication_day] =&gt; 7
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 947
+                                                    [name] =&gt; William Shakespeare
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [1] =&gt; Array
+                                (
+                                    [id] =&gt; 16286
+                                    [title] =&gt; The Magus
+                                    [title_without_series] =&gt; The Magus
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; Array
+                                        (
+                                        )
+
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 1816475
+                                        )
+
+                                    [isbn] =&gt; 0316296198
+                                    [isbn13] =&gt; 9780316296199
+                                    [average_rating] =&gt; 4.04
+                                    [ratings_count] =&gt; 36017
+                                    [publication_year] =&gt; Array
+                                        (
+                                        )
+
+                                    [publication_month] =&gt; Array
+                                        (
+                                        )
+
+                                    [publication_day] =&gt; Array
+                                        (
+                                        )
+
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 10039
+                                                    [name] =&gt; John Fowles
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [2] =&gt; Array
+                                (
+                                    [id] =&gt; 2325390
+                                    [title] =&gt; Array
+                                        (
+                                        )
+
+                                    [title_without_series] =&gt; Array
+                                        (
+                                        )
+
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 81
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 14685966
+                                        )
+
+                                    [isbn] =&gt; 143410169X
+                                    [isbn13] =&gt; 9781434101693
+                                    [average_rating] =&gt; 4.20
+                                    [ratings_count] =&gt; 8279
+                                    [publication_year] =&gt; 2008
+                                    [publication_month] =&gt; 7
+                                    [publication_day] =&gt; 30
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 18540
+                                                    [name] =&gt; T.S. Eliot
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [3] =&gt; Array
+                                (
+                                    [id] =&gt; 16113
+                                    [title] =&gt; Array
+                                        (
+                                        )
+
+                                    [title_without_series] =&gt; Array
+                                        (
+                                        )
+
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 718
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 17890
+                                        )
+
+                                    [isbn] =&gt; 0226677141
+                                    [isbn13] =&gt; 9780226677149
+                                    [average_rating] =&gt; 3.95
+                                    [ratings_count] =&gt; 3419
+                                    [publication_year] =&gt; 1995
+                                    [publication_month] =&gt; 5
+                                    [publication_day] =&gt; 31
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 9947
+                                                    [name] =&gt; Anthony Powell
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [4] =&gt; Array
+                                (
+                                    [id] =&gt; 17690
+                                    [title] =&gt; The Trial
+                                    [title_without_series] =&gt; The Trial
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 255
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 2965832
+                                        )
+
+                                    [isbn] =&gt; 0099428644
+                                    [isbn13] =&gt; 9780099428640
+                                    [average_rating] =&gt; 3.98
+                                    [ratings_count] =&gt; 151768
+                                    [publication_year] =&gt; 2001
+                                    [publication_month] =&gt; 4
+                                    [publication_day] =&gt; 9
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 5223
+                                                    [name] =&gt; Franz Kafka
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [5] =&gt; Array
+                                (
+                                    [id] =&gt; 5206937
+                                    [title] =&gt; A Modest Proposal
+                                    [title_without_series] =&gt; A Modest Proposal
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 48
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 6627040
+                                        )
+
+                                    [isbn] =&gt; 1605977276
+                                    [isbn13] =&gt; 9781605977270
+                                    [average_rating] =&gt; 4.05
+                                    [ratings_count] =&gt; 32654
+                                    [publication_year] =&gt; 2008
+                                    [publication_month] =&gt; 7
+                                    [publication_day] =&gt; 4
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 1831
+                                                    [name] =&gt; Jonathan Swift
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [6] =&gt; Array
+                                (
+                                    [id] =&gt; 416775
+                                    [title] =&gt; زندگی در پیش&zwnj;رو
+                                    [title_without_series] =&gt; زندگی در پیش&zwnj;رو
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 222
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 26429862
+                                        )
+
+                                    [isbn] =&gt; Array
+                                        (
+                                        )
+
+                                    [isbn13] =&gt; Array
+                                        (
+                                        )
+
+                                    [average_rating] =&gt; 4.13
+                                    [ratings_count] =&gt; 7764
+                                    [publication_year] =&gt; 2007
+                                    [publication_month] =&gt; Array
+                                        (
+                                        )
+
+                                    [publication_day] =&gt; Array
+                                        (
+                                        )
+
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 32807
+                                                    [name] =&gt; Romain Gary
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [7] =&gt; Array
+                                (
+                                    [id] =&gt; 6192
+                                    [title] =&gt; Disgrace
+                                    [title_without_series] =&gt; Disgrace
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 220
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 1882981
+                                        )
+
+                                    [isbn] =&gt; 0143036378
+                                    [isbn13] =&gt; 9780143036371
+                                    [average_rating] =&gt; 3.83
+                                    [ratings_count] =&gt; 59720
+                                    [publication_year] =&gt; 2005
+                                    [publication_month] =&gt; 8
+                                    [publication_day] =&gt; 30
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 4128
+                                                    [name] =&gt; J.M. Coetzee
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [8] =&gt; Array
+                                (
+                                    [id] =&gt; 80176
+                                    [title] =&gt; Winesburg, Ohio
+                                    [title_without_series] =&gt; Winesburg, Ohio
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 240
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 191520
+                                        )
+
+                                    [isbn] =&gt; 0192839772
+                                    [isbn13] =&gt; 9780192839770
+                                    [average_rating] =&gt; 3.83
+                                    [ratings_count] =&gt; 23951
+                                    [publication_year] =&gt; 1999
+                                    [publication_month] =&gt; 11
+                                    [publication_day] =&gt; 11
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 45645
+                                                    [name] =&gt; Sherwood Anderson
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [9] =&gt; Array
+                                (
+                                    [id] =&gt; 18839
+                                    [title] =&gt; Orlando
+                                    [title_without_series] =&gt; Orlando
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 228
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 6057225
+                                        )
+
+                                    [isbn] =&gt; 0141184272
+                                    [isbn13] =&gt; 9780141184272
+                                    [average_rating] =&gt; 3.85
+                                    [ratings_count] =&gt; 37597
+                                    [publication_year] =&gt; Array
+                                        (
+                                        )
+
+                                    [publication_month] =&gt; Array
+                                        (
+                                        )
+
+                                    [publication_day] =&gt; Array
+                                        (
+                                        )
+
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 6765
+                                                    [name] =&gt; Virginia Woolf
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [10] =&gt; Array
+                                (
+                                    [id] =&gt; 258392
+                                    [title] =&gt; Gormenghast
+                                    [title_without_series] =&gt; Gormenghast
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 505
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 3599885
+                                        )
+
+                                    [isbn] =&gt; 074939482X
+                                    [isbn13] =&gt; 9780749394820
+                                    [average_rating] =&gt; 4.00
+                                    [ratings_count] =&gt; 9493
+                                    [publication_year] =&gt; 1998
+                                    [publication_month] =&gt; 2
+                                    [publication_day] =&gt; 5
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 22018
+                                                    [name] =&gt; Mervyn Peake
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [11] =&gt; Array
+                                (
+                                    [id] =&gt; 7144
+                                    [title] =&gt; Crime and Punishment
+                                    [title_without_series] =&gt; Crime and Punishment
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 545
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 3393917
+                                        )
+
+                                    [isbn] =&gt; 0143058142
+                                    [isbn13] =&gt; 9780143058144
+                                    [average_rating] =&gt; 4.18
+                                    [ratings_count] =&gt; 425478
+                                    [publication_year] =&gt; 2002
+                                    [publication_month] =&gt; 12
+                                    [publication_day] =&gt; 31
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 3137322
+                                                    [name] =&gt; Fyodor Dostoyevsky
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [12] =&gt; Array
+                                (
+                                    [id] =&gt; 162898
+                                    [title] =&gt; Array
+                                        (
+                                        )
+
+                                    [title_without_series] =&gt; Array
+                                        (
+                                        )
+
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 480
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 2621763
+                                        )
+
+                                    [isbn] =&gt; 1416534733
+                                    [isbn13] =&gt; 9781416534730
+                                    [average_rating] =&gt; 3.75
+                                    [ratings_count] =&gt; 72565
+                                    [publication_year] =&gt; 2007
+                                    [publication_month] =&gt; 5
+                                    [publication_day] =&gt; 1
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 1244
+                                                    [name] =&gt; Mark Twain
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [13] =&gt; Array
+                                (
+                                    [id] =&gt; 5797
+                                    [title] =&gt; Vanity Fair
+                                    [title_without_series] =&gt; Vanity Fair
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 867
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 1057468
+                                        )
+
+                                    [isbn] =&gt; 0141439831
+                                    [isbn13] =&gt; 9780141439839
+                                    [average_rating] =&gt; 3.76
+                                    [ratings_count] =&gt; 95270
+                                    [publication_year] =&gt; 2003
+                                    [publication_month] =&gt; 1
+                                    [publication_day] =&gt; 30
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 3953
+                                                    [name] =&gt; William Makepeace Thackeray
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [14] =&gt; Array
+                                (
+                                    [id] =&gt; 3690
+                                    [title] =&gt; The Power and the Glory
+                                    [title_without_series] =&gt; The Power and the Glory
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 222
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 1036817
+                                        )
+
+                                    [isbn] =&gt; 0142437301
+                                    [isbn13] =&gt; 9780142437308
+                                    [average_rating] =&gt; 3.99
+                                    [ratings_count] =&gt; 22355
+                                    [publication_year] =&gt; 2003
+                                    [publication_month] =&gt; 2
+                                    [publication_day] =&gt; 25
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 2533
+                                                    [name] =&gt; Graham Greene
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [15] =&gt; Array
+                                (
+                                    [id] =&gt; 30672
+                                    [title] =&gt; Darkness at Noon
+                                    [title_without_series] =&gt; Darkness at Noon
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 216
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 881601
+                                        )
+
+                                    [isbn] =&gt; 0553265954
+                                    [isbn13] =&gt; 9780553265958
+                                    [average_rating] =&gt; 4.06
+                                    [ratings_count] =&gt; 18694
+                                    [publication_year] =&gt; 1984
+                                    [publication_month] =&gt; 3
+                                    [publication_day] =&gt; Array
+                                        (
+                                        )
+
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 17219
+                                                    [name] =&gt; Arthur Koestler
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [16] =&gt; Array
+                                (
+                                    [id] =&gt; 811970
+                                    [title] =&gt; Euthyphro
+                                    [title_without_series] =&gt; Euthyphro
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 128
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 797907
+                                        )
+
+                                    [isbn] =&gt; 1853991325
+                                    [isbn13] =&gt; 9781853991325
+                                    [average_rating] =&gt; 3.88
+                                    [ratings_count] =&gt; 4597
+                                    [publication_year] =&gt; 2011
+                                    [publication_month] =&gt; 2
+                                    [publication_day] =&gt; 10
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 879
+                                                    [name] =&gt; Plato
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                            [17] =&gt; Array
+                                (
+                                    [id] =&gt; 115476
+                                    [title] =&gt; Nostromo
+                                    [title_without_series] =&gt; Nostromo
+                                    [link] =&gt; Array
+                                        (
+                                        )
+
+                                    [small_image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [image_url] =&gt; Array
+                                        (
+                                        )
+
+                                    [num_pages] =&gt; 336
+                                    [work] =&gt; Array
+                                        (
+                                            [id] =&gt; 678519
+                                        )
+
+                                    [isbn] =&gt; 0486424529
+                                    [isbn13] =&gt; 9780486424521
+                                    [average_rating] =&gt; 3.81
+                                    [ratings_count] =&gt; 12265
+                                    [publication_year] =&gt; 2002
+                                    [publication_month] =&gt; 12
+                                    [publication_day] =&gt; 31
+                                    [authors] =&gt; Array
+                                        (
+                                            [author] =&gt; Array
+                                                (
+                                                    [id] =&gt; 3345
+                                                    [name] =&gt; Joseph Conrad
+                                                    [link] =&gt; Array
+                                                        (
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
