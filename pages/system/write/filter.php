@@ -1,4 +1,4 @@
-<?php 
+<?php
 //print_r($_List);
 
 $genresAr = array();
@@ -11,13 +11,14 @@ if (isset($_POST['genres'])) {
 $start = isset($_POST['start']) ? $_POST['start'] : 0;
 $records = isset($_POST['records']) ? $_POST['records'] : 24;
 $keyword = isset($_POST['keyword']) ? $_POST['keyword'] : null;
+$in_storage = isset($_POST['in_storage']) ? $_POST['in_storage'] : -1;
 $authorAr = array();
 if (isset($_POST['author'])) {
 	foreach ($_POST['author'] as $oneAu)
 		$authorAr[] = $oneAu;
 }
 
-$stmt = $book->readAll('', $genresAr, $authorAr, '', $start, $records, $keyword);
+$stmt = $book->readAll('', $genresAr, $authorAr, '', $start, $records, $keyword, $in_storage);
 $_List = $book->all_list;
 $num = $book->countAll('', $genresAr, $authorAr, $keyword);
 //$num = count($_List);
@@ -29,13 +30,13 @@ if ($num <= 0) {
 } else {
 	$pages = ceil($num/$records)-1;
 	$pageHTML = '<ul class="pagination right">';
-	
+
 	$prevSt = $start - $records;
 	if ($prevSt <= 0) $pageHTML .= '<li class="paginate_button previous disabled" id="book-list_previous"><a href="#">Previous</a></li>';
 	else $pageHTML .= '<li class="paginate_button previous" id="book-list_previous"><a href="?start='.$prevSt.'&records='.$records.'">Previous</a></li>';
-	
+
 	$currentPage = $start/$records;
-	
+
 	if ($pages <= 3) {
 		$pageHTML .= $book->showPages(0, $records, $pages, $start);
 	} else {
@@ -46,15 +47,15 @@ if ($num <= 0) {
 		if ($start > ($pages-1)*$records) { // page last/last
 			$pageHTML .= '<li class="paginate_button disabled"><a href="#">...</a></li>';
 			$pageHTML .= $book->showPages($pages-1, $records, $pages, $start);
-		} 
+		}
 		else if ($start > ($pages-2)*$records) { // page (last-1)/last
 			$pageHTML .= '<li class="paginate_button disabled"><a href="#">...</a></li>';
 			$pageHTML .= $book->showPages($currentPage-1, $records, $pages, $start);
-		} 
+		}
 		else if ($start > ($pages-3)*$records) { // page (last-2)/last
 			$pageHTML .= '<li class="paginate_button disabled"><a href="#">...</a></li>';
 			$pageHTML .= $book->showPages($currentPage-1, $records, $pages, $start);
-		} 
+		}
 		else {
 			if ($start >= 2*$records) {
 				if ($start > 2*$records) $pageHTML .= '<li class="paginate_button disabled"><a href="#">...</a></li>';
@@ -67,13 +68,13 @@ if ($num <= 0) {
 			$pageHTML .= $book->showPages($pages, $records, $pages, $start);
 		}
 	}
-	
+
 	$nextSt = $start + $records;
 	if ($nextSt > $num) $pageHTML .= '<li class="paginate_button next disabled" id="book-list_next"><a href="#">Next</a></li>';
 	else $pageHTML .= '<li class="paginate_button next" id="book-list_next"><a href="?start='.$nextSt.'&records='.$records.'">Next</a></li>';
-	
+
 	$pageHTML .= '</ul>';
-	
+
 foreach ($_List as $bK => $bO) {
 	$isUID = ($bO['uid'] > 0 && $bO['type'] == 0) ? 1 : 0;
 	$ratings = $stick = '';
@@ -85,7 +86,10 @@ foreach ($_List as $bK => $bO) {
 	if ($bO['published'] == 1) $stick .= '<div title="Tác phẩm này đã được xuất bản" class="one-book-published"></div>';
 	if ($bO['type'] == 0 && $bO['uid']) $stick .= '<div title="Tác phẩm này được viết bởi thành viên của mBook" class="one-book-written"></div>';
 	if ($bO['type'] == 1) $stick .= '<div title="Đây là một chủ đề" class="one-book-topic"></div>';
-	
+
+	//print_r($bO);
+	if ($bO['in_storage'] == 1) $stick .= '<div title="Có sẵn trong kho sách. Số lượng: '.$bO['num_in_storage'].'" class="one-book-in_storage">'.$bO['num_in_storage'].'</div>';
+
 	if ($bO['type'] == 0) {
 		$chapNumTxt = '<div class="one-book-chapters center">
 						<span>'.$bO['chaptersNum'].'</span> chương
@@ -104,7 +108,7 @@ foreach ($_List as $bK => $bO) {
 				bài viết
 			</div>';
 	}
-	
+
 	$ar[] = '<div class="col-lg-3 no-padding-right"><div data-published="'.$bO['published'].'" data-uid="'.$isUID.'" data-topic="'.$bO['type'].'" data-id="'.$bO['id'].'" class="box one-book">
 		<div class="box-body">
 			<div class="one-book-thumb">
@@ -123,7 +127,7 @@ foreach ($_List as $bK => $bO) {
 					</a>
 				</h2>
 				<div class="one-book-status right">
-					<b>'.$bO['sttTextIcon'].'</b> 
+					<b>'.$bO['sttTextIcon'].'</b>
 				</div>
 				<div class="one-book-author">
 					<a href="'.$bO['author']['link'].'">'.$bO['author']['name'].'</a>

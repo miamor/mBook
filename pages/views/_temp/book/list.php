@@ -34,7 +34,7 @@
 				<input type="radio" value="1" name="free_download"/> With free samples
 			</label>
 		</div>
-	</div>-->
+	</div>
 	<div class="filter-status">
 		<h4 class="filter-header with-border">Tình trạng</h4>
 		<div class="filter-body">
@@ -45,8 +45,19 @@
 				<input type="radio" value="-1" checked name="status"/> Tất cả
 			</label>
 		</div>
+	</div>-->
+	<div class="filter-status">
+		<h4 class="filter-header with-border">Tình trạng</h4>
+		<div class="filter-body">
+			<label class="radio">
+				<input type="radio" value="1" name="in_storage"/> Có trong kho sách
+			</label>
+			<label class="radio">
+				<input type="radio" value="-1" checked name="in_storage"/> Tất cả
+			</label>
+		</div>
 	</div>
-	
+
 	<div class="center">
 		<input type="submit" value="Lọc"/>
 	</div>

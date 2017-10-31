@@ -7,7 +7,7 @@ $review = new Review();
 if ($n) {
 	// get review data
 	$review->id = $n;
-	if ($temp == 'feed') $review->isFeed = true; 
+	if ($temp == 'feed') $review->isFeed = true;
 	$rView = $review->readOne();
 	extract($rView);
 

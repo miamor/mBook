@@ -30,15 +30,27 @@
 		</div>
 		<div class="col-lg-9 no-padding">
 			<div class="box book-des">
-				<h3 class="box-header with-border no-margin">Thông tin</h3>
 				<div class="box-body">
 					<?php echo $des ?>
 				</div>
 			</div>
+
+			<div class="box book-borrow col-lg-8">
+				<h3 class="box-header with-border no-margin">Đăng ký mượn sách</h3>
+				<div class="box-body">
+					<ul class="book-users-borrow">
+						<li class="book-user-borrow-one">
+							<a href="#"><img class="book-user-borrow-one-avt" src="http://localhost/rent/data/images/h14.jpg"/> Miamor W.</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="box book-ratings col-lg-4">
+			</div>
+			<div class="clearfix"></div>
 		</div>
 		<div class="clearfix"></div>
 	</div>
 
 	<div class="clearfix"></div>
 </div>
-

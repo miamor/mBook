@@ -17,7 +17,9 @@
 							else echo '<i class="fa fa-star"></i>';
 						} ?>
 					</div>
-					<a href="<?php echo $author['link'] ?>"><?php echo $author['name'] ?></a> đã thêm 1 <a href="<?php echo $link ?>">review</a> cho cuốn sách <a href="<?php echo $book['link'] ?>"><?php echo $book['title'] ?></a>
+					<a href="<?php echo $author['link'] ?>"><?php echo $author['name'] ?></a> đã thêm 1 <a href="<?php echo $link ?>">review</a> cho cuốn sách
+					<?php if ($book['id']) echo '<a href="'. $book['link'] .'">'. $book['title'] .'</a>';
+					else echo '<a href="#">'.$title.'</a>'; ?>
 				</div>
 				<div class="box-body feed-main-content feed-rv-content">
 					<div class="feed-rv-thumb">
@@ -72,7 +74,7 @@
 
 	<div class="col-lg-3 feed-book-info no-padding feed-rv-book">
 <?php if (!$iid) {
-	echo '<div class="not-available alerts alert-warning no-margin">Cuốn sách này chưa có sẵn trong thư viện eBook của mBook.</div>';
+	echo '<div class="not-available alerts alert-warning no-margin">Cuốn sách này chưa có sẵn trong thư viện của mBook. <a href="'.$config->bLink.'?mode=new">Thêm</a></div>';
 } else { ?>
 		<a data-uid="<?php echo ($book['uid']) ? 1 : 0 ?>" data-published="<?php echo ($book['published']) ? 1 : 0 ?>" href="<?php echo $book['link'] ?>" title="<?php echo $book['title'] ?>">
 			<img class="book-thumb" src="<?php echo $book['thumb'] ?>">
@@ -105,9 +107,14 @@
 				<b>Tác giả:</b> <a href="<?php echo $book['author']['link'] ?>"><?php echo $book['author']['name'] ?></a>
 			</div>
 		</div>
+		<?php
+		if ($book['in_storage']) {
+			echo '<a href="'.$book['link'].'#in_storage" class="btn btn-danger btn-block book-in_storage">Có sẵn trong kho sách ('.$book['num_in_storage'].')</a>';
+		}
+		?>
 <?php } ?>
 	</div>
-			
+
 	<div class="clearfix"></div>
 </div>
 

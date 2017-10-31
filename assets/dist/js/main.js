@@ -22,9 +22,9 @@ function redirect(location) {
 		else window.location.href = location;
 //	}, time)
 }
-$.fn.digits = function(){ 
-	return this.each(function(){ 
-		$(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") ); 
+$.fn.digits = function(){
+	return this.each(function(){
+		$(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") );
 	})
 }
 
@@ -113,12 +113,11 @@ function validator (a, href) {
 				alertsType = data.split(/\[type\]|\[\/type\]/)[1];
 				alertsDataID = data.split(/\[dataID\]|\[\/dataID\]/)[1];
 				if (alertsType == 'success') {
+					$form.find('textarea').val('');
 					if ($form.find('.sceditor-container').length) {
-						$form.find('textarea').each(function () {
+						$form.find('.sceditor-container').prev('textarea').each(function () {
 							$(this).val('').sceditor('instance').val('');
 						})
-					} else {
-						$form.find('textarea').val('');
 					}
 				}
 				$form.addClass('just-sent').children('.spinner.loading-sending').remove();
@@ -129,19 +128,19 @@ function validator (a, href) {
 					if (alertsType == 'success') location.reload();
 					else if (alertsDataID == 'username') $('[name="username"]').next('.form-control-feedback').removeClass('glyphicon-ok').addClass('glyphicon-remove').closest('.has-feedback').removeClass('has-success').addClass('has-error');
 					else if (alertsDataID == 'password') $('[name="confirm_password"]').next('.form-control-feedback').removeClass('glyphicon-ok').addClass('glyphicon-remove').closest('.has-feedback').removeClass('has-success').addClass('has-error');
-				} 
+				}
 				else if ($form.is('.ratings-form')) {
 					table.ajax.reload(function (json) {
 						$('.r-cmts').show();
 						table.page('last').draw('page');
 					});
-				} 
+				}
 				else if ($form.is('.new-post')) {
 					href = MAIN_URL+'/status/'+alertsDataID+'?temp=feed';
 					$('#post-list').prepend('<div data-type="status" data-iid="'+alertsDataID+'" class="feed-load"><span class="feed-href hidden">'+href+'</span></div>');
 					$this = $('.feed-load[data-type="status"][data-iid="'+alertsDataID+'"]');
 					loadFeed(href, $this, alertsDataID, 'status');
-				} 
+				}
 				else if ($form.is('.comment-form-feed')) {
 					$form.find('.cmt-textarea').attr('readonly', false);
 					if (alertsType == 'success') {
@@ -181,7 +180,7 @@ function validator (a, href) {
 						</span><!-- /.username -->\
 						'+alertsDataID+'</div><!-- /.comment-text -->\
 				</div>');
-				} // end if (alertsType == 'success') 
+				} // end if (alertsType == 'success')
 				} else if (alertsDataID) {
 					if (alertsType == 'success') redirect(alertsDataID);
 				}
@@ -348,7 +347,7 @@ function sce (a) {
 /*		emoList = initEmoFBList();
 		emoListStr = JSON.stringify(emoList);
 */		$(this).sceditor({
-			plugins: "bbcode",
+			//plugins: "bbcode",
 			style: PLUGINS+"/sceditor/minified/jquery.sceditor.default.min.css",
 			parserOptions: {
 				breakAfterBlock: false
@@ -365,7 +364,7 @@ function sce (a) {
 	});
 	$(a).find('.stt-form textarea').each(function () {
 		$(this).sceditor({
-			plugins: "bbcode",
+			//plugins: "bbcode",
 			style: PLUGINS+"/sceditor/minified/jquery.sceditor.sttform.min.css",
 			parserOptions: {
 				breakAfterBlock: false
@@ -382,7 +381,7 @@ function sce (a) {
 	});
 	$(a).find('textarea.add-comment-line-textarea').each(function () {
 		$(this).sceditor({
-//			plugins: "bbcode",
+//			//plugins: "bbcode",
 			style: PLUGINS+"/sceditor/minified/jquery.sceditor.default.min.css",
 			toolbar:	'bold,italic,underline,strike,' +
 				'color,removeformat,' +
@@ -398,13 +397,13 @@ function getFormData ($form) {
 		$form.find('.sceditor-container').each(function () {
 			var vl = $(this).prev('textarea').sceditor('instance').val();
 //			var vl = $(this).prev('textarea').sceditor('instance').getSourceEditorValue('bbcode');
-			vl = $(this).prev("textarea").sceditor('instance').fromBBCode(vl, true);
+			//vl = $(this).prev("textarea").sceditor('instance').fromBBCode(vl, true);
 			$(this).prev('textarea').val(vl);
 		})
 	}
 	formData = $form.serialize();
 	return formData;
-} 
+}
 
 function choosen (a) {
 	"use strict";
@@ -447,7 +446,7 @@ function flatApp () {
 			var id = $(this).attr('id');
 			$('button.to-collapse[data-target="#' + id + '"]').html('<i class="fa fa-chevron-down"></i>');
 		});
-		
+
 		$('.collapse').on('show.bs.collapse', function() {
 			var id = $(this).attr('id');
 			$('a.block-collapse[href="#' + id + '"] span.right-icon').html('<i class="glyphicon glyphicon-minus icon-collapse"></i>');

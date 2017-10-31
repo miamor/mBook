@@ -3,7 +3,7 @@ $review->content = $content = isset($_POST['content']) ? $_POST['content'] : nul
 $review->toFB = $toFB = isset($_POST['to_fb']) ? $_POST['to_fb'] : false;
 $review->thumb = $thumb = isset($_FILES['thumb']) ? $_FILES['thumb'] : null;
 $review->thumbPath = null;
-$review->bookTitle = isset($_POST['book']) ? $_POST['book'] : 0;
+$review->bookTitle = isset($_POST['book']) ? $_POST['book'] : null;
 $review->iid = $iid = isset($_POST['bid']) ? $_POST['bid'] : 0;
 $review->rate = $rate = isset($_POST['rate']) ? $_POST['rate'] : 0;
 $review->uid = $uid = isset($_POST['uid']) ? $_POST['uid'] : $config->u;
@@ -23,8 +23,8 @@ if ( (!$toFB || ($toFB && $thumb) ) && $content && $rate) {
 			if ($create) {
 				if ($toFB) {
 					$text = $review->content."<br/>".$review->link;
-					$breaks = array("<br />","<br>","<br/>");  
-					$text = str_ireplace($breaks, "\r\n", $text);  
+					$breaks = array("<br />","<br>","<br/>");
+					$text = str_ireplace($breaks, "\r\n", $text);
 					$data = [
 						'message' => str_replace('&nbsp;', ' ', rtrim(strip_tags($text))),
 						'source' => $config->FB->fileToUpload($review->thumbPath),

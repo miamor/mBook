@@ -8,7 +8,7 @@ class Chapter extends Config {
 	public $coins = 0;
 	public $bChapters = array();
 	public $isFeed = false;
-	
+
 	public function __construct() {
 		parent::__construct();
 	}
@@ -51,7 +51,7 @@ class Chapter extends Config {
 					type = ?, uid = ?, ilink = ?, bid = ?";
 
 		$stmt = $this->conn->prepare($query);
-		
+
 		// bind values
 		$stmt->bindParam(1, $type);
 		$stmt->bindParam(2, $this->u);
@@ -104,7 +104,7 @@ class Chapter extends Config {
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $row;
 	}
-	
+
 	function reply () {
 		$query = "INSERT INTO
 					" . $this->table_name . "_reviews
@@ -112,18 +112,18 @@ class Chapter extends Config {
 					content = ?, rate = ?, bid = ?, cid = ?, uid = ?";
 
 		$stmt = $this->conn->prepare($query);
-		
+
 		// bind values
 		$stmt->bindParam(1, $this->rContent);
 		$stmt->bindParam(2, $this->rate);
 		$stmt->bindParam(3, $this->bid);
 		$stmt->bindParam(4, $this->id);
 		$stmt->bindParam(5, $this->u);
-		
+
 //		echo $this->table_name.'_reviews ~ '.$this->rContent.' ~ '.$this->rate.' ~ '.$this->bid.' ~ '.$this->id.' ~ '.$this->u;
 
 		if ($stmt->execute()) {
-				// add coin for user who writes this 
+				// add coin for user who writes this
 				$coinsForWhomRated = (COINS_RATE_USER_WRITE_CHAPTER*$this->rate)/5;
 				$this->addCoin($coinsForWhomRated, $this->uid);
 				// add coin for user who rates ($this->u)
@@ -168,7 +168,7 @@ class Chapter extends Config {
 					*
 				FROM
 					" . $this->table_name . "
-				WHERE 
+				WHERE
 					iid = ?
 				ORDER BY
 					{$order}";
@@ -181,7 +181,7 @@ class Chapter extends Config {
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $row['link'] = $this->bookLink.'/chapters/'.$row['link'];
 			if ($row['uid']) $row['author'] = $this->getUserInfo($row['uid']);
-			
+
 			$row['content'] = content($row['content']);
 
 			$row['coins'] = $this->getCoins($row['id']);
@@ -190,24 +190,24 @@ class Chapter extends Config {
 
 		return $stmt;
 	}
-	
+
 	function readOne ($byID = false) {
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "
-				WHERE 
+				WHERE
 					(n = ? OR link = ?) AND iid = ?
 				LIMIT 0,1";
-	
+
 		preg_match('!\d+!', $this->id, $matches);
 		if ($this->id == $matches[0] || $byID) $query = "SELECT * FROM
 					" . $this->table_name . "
-				WHERE 
+				WHERE
 					id = ? AND iid = ?
 				LIMIT 0,1";
 		$stmt = $this->conn->prepare($query);
-		
+
 		if ($this->id == $matches[0] || $byID) {
 			$stmt->bindParam(1, $this->id);
 			$stmt->bindParam(2, $this->bid);
@@ -225,13 +225,13 @@ class Chapter extends Config {
 			$this->title = $row['title'];
 			$this->uid = $row['uid'];
 			$row['link'] = $this->link = $this->bookLink.'/chapters/'.$row['link'];
-			
+
 			// author
 			if ($row['uid']) $row['author'] = $this->getUserInfo($row['uid']);
-			
+
 			// content
 			$row['content'] = content($row['content']);
-			$row['content_feed'] = (strlen($row['content']) > 1500) ? content(substr(htmlspecialchars(strip_tags($row['content'], '<br>')), 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>' : $row['content'];
+			$row['content_feed'] = (strlen($row['content']) > 1500) ? content(substr(htmlspecialchars(strip_tags($row['content'], '<br>')), 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
 
 			$row['shareNum'] = $this->getShareNum();
 
@@ -240,7 +240,7 @@ class Chapter extends Config {
 			$row['ratingsNum'] = $this->rTotal;
 	//		$row['ratingsList'] = $this->ratingsList;
 	//		$row['ratingsNum'] = $this->countRatings();
-			
+
 			$row['coins'] = $this->coins;
 		}
 		return $row;
@@ -270,7 +270,7 @@ class Chapter extends Config {
 			$stmt->bindParam(2, $this->id);
 			$stmt->bindParam(3, $this->fb_post_id);
 			if ($stmt->execute()) {
-				// add coin for user who writes this 
+				// add coin for user who writes this
 				$this->addCoin(COINS_SHARE_USER_WRITE_CHAPTER, $this->uid);
 				// add coin for user who shares ($this->u)
 				$this->addCoin(COINS_SHARE_CHAPTER);
@@ -290,7 +290,7 @@ class Chapter extends Config {
 					);
 				$this->addNoti($valAr, $this->uid);
 
-				return true; 
+				return true;
 			}
 			else return false;
 		} else return false;
@@ -299,14 +299,14 @@ class Chapter extends Config {
 
 	function getRatings ($id = '', $order = '') {
 		if (!$id) $id = $this->id;
-		
+
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "_reviews
-				WHERE 
+				WHERE
 					bid = ? AND cid = ?";
-		
+
 		$valAr = array($this->bid, $id);
 //		$this->ratingsList = $this->_getRatings($query, $valAr, true, $this->isFeed);
 		$this->ratingsList = $this->_getRatings($query, $valAr);
@@ -316,28 +316,28 @@ class Chapter extends Config {
 
 /*	function countRatings ($id = '') {
 		if (!$id) $id = $this->id;
-		
+
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "_reviews
-				WHERE 
+				WHERE
 					bid = ? AND cid = ?";
-		
+
 		$valAr = array($this->bid, $id);
 		$num = $this->_countRatings($query, $valAr);
-		
+
 		return $num;
 	}
-*/	
+*/
 	function getCoins ($id = '') {
 		if (!$id) $id = $this->id;
-		
+
 		$query = "SELECT
 					rate,uid
 				FROM
 					" . $this->table_name . "_reviews
-				WHERE 
+				WHERE
 					bid = ? AND cid = ?";
 
 		$stmt = $this->conn->prepare($query);
@@ -350,20 +350,20 @@ class Chapter extends Config {
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			// set coins
 			$row['coins'] = 5;
-			
+
 			// add coins to the chapter
 			$cCoins += $row['coins'];
 		}
-		
+
 		return $cCoins;
 	}
 
-	
+
 	function doEdit () {
-		
+
 	}
-	
-	
+
+
 	function update() {
 		parent::getTimestamp();
 
@@ -383,9 +383,9 @@ class Chapter extends Config {
 		$this->title = htmlspecialchars(strip_tags($this->title));
 		$this->content = $this->content;
 		$this->link = encodeURL($this->title);
-		
+
 //		echo $this->title.'~'.$this->content.'~'.$this->link.'~'.$this->timestamp.'~'.$this->id;
-		
+
 		// bind parameters
 		$stmt->bindParam(':title', $this->title);
 		$stmt->bindParam(':content', $this->content);
@@ -402,7 +402,7 @@ class Chapter extends Config {
 	function delete() {
 
 		$query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
-		
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
 

@@ -6,7 +6,7 @@ class Post extends Config {
 	private $table_name = "posts";
 	protected $bid;
 	public $isFeed = false;
-	
+
 	public function __construct() {
 		parent::__construct();
 	}
@@ -58,7 +58,7 @@ class Post extends Config {
 		$row['link'] = $this->sLink.'/'.$row['id'];
 		return $row;
 	}
-	
+
 	public function countAll(){
 		$query = "SELECT id FROM " . $this->table_name . "";
 
@@ -75,7 +75,7 @@ class Post extends Config {
 
 		if (!$gid) $gid = $this->gid;
 		if ($gid) $cond = "WHERE gid = ?";
-		
+
 		$numPerPage = 5;
 		$start = $page*$numPerPage;
 		$lim = "LIMIT {$start}, {$numPerPage}";
@@ -98,17 +98,17 @@ class Post extends Config {
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$row['link'] = $this->sLink.'/'.$row['id'];
 			$row['author'] = $this->getUserInfo($row['uid']);
-			
+
 			// content
 			$row['content'] = content($row['content']);
-			
+
 			// likes
 			$row['likesNum'] = 0;
 			$row['likesAr'] = array();
 			if ($row['likes']) {
 				$likesAr = explode(',', $row['likes']);
 				$uLikes = array();
-				foreach ($likesAr as $oS) 
+				foreach ($likesAr as $oS)
 					$uLikes[] = $this->getUserInfo($oS);
 				$row['likesAr'] = $uLikes;
 				$row['likesNum'] = count($likesAr);
@@ -119,7 +119,7 @@ class Post extends Config {
 			if ($row['dislikes']) {
 				$dislikesAr = explode(',', $row['dislikes']);
 				$uDislikes = array();
-				foreach ($dislikesAr as $oS) 
+				foreach ($dislikesAr as $oS)
 					$uDislikes[] = $this->getUserInfo($oS);
 				$row['dislikesAr'] = $uDislikes;
 				$row['dislikesNum'] = count($dislikesAr);
@@ -137,24 +137,24 @@ class Post extends Config {
 			if (!$row['type']) {
 				$row['type'] = 'status';
 				$row['iid'] = $row['id'];
-				if (!$row['href']) 
+				if (!$row['href'])
 					$row['href'] = 'status/'.$row['id'];
 			} else if ($row['type'] == 'review') {
 				$row['href'] = 'review/'.$row['id'];
 			}
-			
+
 			$this->all_list[] = $row;
 		}
 
 		return $stmt;
 	}
-	
+
 	function readOne () {
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "
-				WHERE 
+				WHERE
 					id = ?
 				LIMIT 0,1";
 
@@ -176,16 +176,16 @@ class Post extends Config {
 			// author
 			$row['author'] = $this->getUserInfo($row['uid']);
 			// content
-//			$row['content_feed'] = (strlen($row['content']) > 1000) ? content(substr(htmlspecialchars(strip_tags($row['content'])), 0, 1000)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="stt-read gensmall">See more</a>' : $row['content'];
-			$row['content_feed'] = (strlen($row['content']) > 1000) ? content(substr($row['content'], 0, 1000)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="stt-read gensmall">See more</a>' : $row['content'];
+//			$row['content_feed'] = (strlen($row['content']) > 1000) ? content(substr(htmlspecialchars(strip_tags($row['content'])), 0, 1000)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="stt-read gensmall">Xem đầy đủ</a>' : $row['content'];
+			$row['content_feed'] = (strlen($row['content']) > 1000) ? content(substr($row['content'], 0, 1000)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="stt-read gensmall">Xem đầy đủ</a>' : $row['content'];
 			$row['content'] = content($row['content']);
-			
+
 			// share list
 			$row['shareNum'] = $this->getShareNum();
 /*			$row['share'] = array();
 			if ($row['share']) {
 				$shareAr = explode(',', $row['share']);
-				foreach ($shareAr as $oS) 
+				foreach ($shareAr as $oS)
 					$uShare[] = $this->getUserInfo($oS);
 				$row['share'] = $uShare;
 				$row['shareNum'] = count($shareAr);
@@ -228,7 +228,7 @@ class Post extends Config {
 			if ($row['dislikes']) {
 				$dislikesAr = explode(',', $row['dislikes']);
 				$uDislikes = array();
-				foreach ($dislikesAr as $oS) 
+				foreach ($dislikesAr as $oS)
 					$uDislikes[] = $this->sGetUserInfo($oS);
 				$row['dislikesAr'] = $uDislikes;
 				$row['dislikesNum'] = count($dislikesAr);
@@ -243,7 +243,7 @@ class Post extends Config {
 		}
 		return $row;
 	}
-	
+
 	function getShareNum () {
 		$query = "SELECT id FROM ".$this->table_name."_share WHERE iid = ?";
 		$stmt = $this->conn->prepare($query);
@@ -267,7 +267,7 @@ class Post extends Config {
 			$stmt->bindParam(2, $this->id);
 			$stmt->bindParam(3, $this->fb_post_id);
 			if ($stmt->execute()) {
-/*				// add coin for user who writes this 
+/*				// add coin for user who writes this
 				$this->addCoin(COINS_SHARE_USER_WRITE_STATUS, $this->uid);
 				// add coin for user who shares ($this->u)
 				$this->addCoin(COINS_SHARE_STATUS);
@@ -285,7 +285,7 @@ class Post extends Config {
 					);
 				$this->addNoti($valAr, $this->uid);
 
-				return true; 
+				return true;
 			}
 			else return false;
 		} else return false;
@@ -326,7 +326,7 @@ class Post extends Config {
 					);
 				$this->addNoti($valAr, $this->uid);
 
-			return true; 
+			return true;
 		}
 		else return false;
 	}
@@ -336,7 +336,7 @@ class Post extends Config {
 					title,code,status
 				FROM
 					groups
-				WHERE 
+				WHERE
 					id = ?
 				LIMIT 0,1";
 
@@ -347,7 +347,7 @@ class Post extends Config {
 
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		if ($stmt->rowCount() > 0) $row['link'] = $this->grLink.'/'.$row['code'];
-		
+
 		return $row;
 	}
 
@@ -365,7 +365,7 @@ class Post extends Config {
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $row;
 	}
-	
+
 	function reply () {
 		$query = "INSERT INTO
 					" . $this->table_name . "_comments
@@ -376,7 +376,7 @@ class Post extends Config {
 
 		// posted values
 //		$this->rContent = content($this->content);
-		
+
 		// bind values
 		$stmt->bindParam(1, $this->rContent);
 		$stmt->bindParam(2, $this->id);
@@ -399,7 +399,7 @@ class Post extends Config {
 		}
 		else return false;
 	}
-	
+
 /*	protected function getComments ($id = null, $order = null) {
 		if (!$order) $order = "modified DESC, created DESC, id DESC";
 		if (!$id) $id = $this->id;
@@ -408,7 +408,7 @@ class Post extends Config {
 					*
 				FROM
 					" . $this->table_name . "_comments
-				WHERE 
+				WHERE
 					iid = ?
 				ORDER BY
 					{$order}";
@@ -423,11 +423,11 @@ class Post extends Config {
 		$this->ratingsList = array();
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$row['author'] = $this->getUserInfo($row['uid']);
-			
-//			$row['content'] = content(substr($row['content'], 0, 1200)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>';
+
+//			$row['content'] = content(substr($row['content'], 0, 1200)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>';
 			$cont = htmlspecialchars(strip_tags($row['content']));
-			$row['short_content'] = (strlen($cont) > 280) ? content(substr($cont, 0, 280)).'... <a href="#" class="see-more" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>' : $row['content'];
-			$row['content_feed'] = (strlen($cont) > 1500) ? content(substr($cont, 0, 1500)).'... <a href="#" class="see-more" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>' : $row['content'];
+			$row['short_content'] = (strlen($cont) > 280) ? content(substr($cont, 0, 280)).'... <a href="#" class="see-more" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
+			$row['content_feed'] = (strlen($cont) > 1500) ? content(substr($cont, 0, 1500)).'... <a href="#" class="see-more" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
 
 			$this->ratingsList[] = $row;
 		}
@@ -439,20 +439,20 @@ class Post extends Config {
 
 		$this->averageRate = number_format($averageRate, 1);
 		$this->totalReview = $totalReview;
-		
+
 		return $stmt;
 	}
 */
 	function getComments ($id = '', $order = '') {
 		if (!$id) $id = $this->id;
-		
+
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "_comments
-				WHERE 
+				WHERE
 					iid = ?";
-		
+
 		$valAr = array($id);
 		$this->ratingsList = $this->_getRatings($query, $valAr, false);
 
@@ -461,12 +461,12 @@ class Post extends Config {
 
 /*	function countComments ($id = '') {
 		if (!$id) $id = $this->id;
-		
+
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "_comments
-				WHERE 
+				WHERE
 					iid = ?";
 
 		$valAr = array($id);
@@ -475,7 +475,7 @@ class Post extends Config {
 		return $num;
 	}
 */
-	
+
 	function update() {
 
 		$query = "UPDATE
@@ -505,7 +505,7 @@ class Post extends Config {
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query
-		if ($stmt->execute()) return true; 
+		if ($stmt->execute()) return true;
 		else return false;
 	}
 
@@ -513,7 +513,7 @@ class Post extends Config {
 	function delete() {
 
 		$query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
-		
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
 

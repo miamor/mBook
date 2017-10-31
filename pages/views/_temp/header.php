@@ -1,6 +1,6 @@
 <?php //echo date("Y-m-d H:i:s");
 $config->addJS('plugins', 'bootstrapValidator/bootstrapValidator.min.js');
-$config->addJS('plugins', 'sceditor/minified/jquery.sceditor.bbcode.min.js');
+$config->addJS('plugins', 'sceditor/minified/jquery.sceditor.min.js');
 $config->addJS('dist', 'main.js'); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,17 +45,20 @@ $config->addJS('dist', 'main.js'); ?>
 				</a>
 			</div>
 		</div> <!-- .left-top -->
-		
+
 		<div class="top-middle">
 			<ul class="items-list">
 				<li class="one-item <?php if ($page == 'home') echo 'active' ?>" id="home"><a href="<?php echo MAIN_URL ?>">Feed</a></li>
 				<li class="one-item <?php if ($page == 'book') echo 'active' ?>" id="book">
 					<a href="<?php echo MAIN_URL ?>/book">eBook</a>
 				</li>
-				<li class="one-item <?php if ($page == 'write') echo 'active' ?>" id="write">
+				<li class="one-item <?php if ($page == 'storage') echo 'active' ?>" id="storage">
+					<a href="<?php echo MAIN_URL ?>/storage">Kho sách</a>
+				</li>
+<!--				<li class="one-item <?php if ($page == 'write') echo 'active' ?>" id="write">
 					<a href="<?php echo MAIN_URL ?>/write">Viết</a>
 				</li>
-<!--				<li class="one-item <?php if ($page == 'review') echo 'active' ?>" id="review">
+				<li class="one-item <?php if ($page == 'review') echo 'active' ?>" id="review">
 					<a href="<?php echo MAIN_URL ?>/review">Đánh giá sách</a>
 				</li>
 				<li class="one-item <?php if ($page == 'summary') echo 'active' ?>" id="summary">
@@ -69,7 +72,7 @@ $config->addJS('dist', 'main.js'); ?>
 				</li>
 				<li class="one-item <?php if ($page == 'gift') echo 'active' ?>" id="gift">
 					<a href="<?php echo MAIN_URL ?>/gift">Quà tặng</a>
-				</li> 
+				</li>
 				<li class="one-item <?php if ($page == 'event') echo 'active' ?>" id="event">
 					<a href="<?php echo MAIN_URL ?>/event">Events</a>
 				</li>
@@ -87,13 +90,13 @@ $config->addJS('dist', 'main.js'); ?>
 				</li>
 				<li class="one-item hidden <?php if ($page == 'print') echo 'active' ?>" id="print">
 					<a href="<?php echo MAIN_URL ?>/print">Bản in</a>
-				</li>-->
+				</li>
 				<li class="one-item <?php if ($page == 'search') echo 'active' ?>" id="search">
 					<a href="<?php echo MAIN_URL ?>/search">Tìm kiếm</a>
 				</li>
 				<li class="one-item <?php if ($page == 'box') echo 'active' ?>" id="box">
 					<a href="<?php echo MAIN_URL ?>/box">#bookStop</a>
-				</li>
+				</li>-->
 			</ul>
 		</div>
 
@@ -182,14 +185,14 @@ $config->addJS('dist', 'main.js'); ?>
 			<?php } ?>
 
 		</div> <!-- .left-bottom -->
-		
+
 		<div class="form-search">
 			<form class="search-form">
 				<input name="keywords" class="search-input" placeholder="Input something..." type="text">
 				<div id="search_button" class="search-button"></div>
 			</form>
 		</div>
-		
+
 	</nav>
 
 

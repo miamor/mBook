@@ -9,7 +9,8 @@
 						else echo '<i class="fa fa-star"></i>';
 					} ?>
 				</div>
-				<i class="fa fa-caret-right to-caret"></i> 
+				<?php echo '<a href="'.$link.'" title="Xem đầy đủ">#review</a>' ?>
+				<i class="fa fa-caret-right to-caret"></i>
 				<?php echo ($iid) ? '<a href="'.$book['link'].'">'. $book['title'] .'</a>' : $title ?>
 			</div>
 			<div class="box-body feed-main-content feed-rv-content">
@@ -43,7 +44,7 @@
 				else echo '<a class="share" data-param="link='. $review->link.'&amp;app_id='. FB_APP_ID .'&amp;redirect_uri='. $review->link.'?do=shareFB"><strong id="share_num_review_'. $review->id .'">'. $shareNum .'</strong> Share</a>'; ?>
 				</div>
 			</div>
-			
+
 			<div class="box-footer box-comments">
 <?php 	$parentPageView = $rView;
 		include 'pages/views/_temp/cmtList.feed.php';
@@ -52,10 +53,10 @@
 			</div><!-- /.box-footer -->
 
 		</div>
-		
+
 		<div class="col-lg-4 no-padding-right feed-rv-book">
 <?php if (!$iid) {
-	echo '<div class="not-available alerts alert-warning no-margin">Cuốn sách này chưa có sẵn trong thư viện eBook của mBook. <a href="'.$config->bLink.'?mode=new">Thêm</a></div>';
+	echo '<div class="not-available alerts alert-warning no-margin">Cuốn sách này chưa có sẵn trong thư viện của mBook. <a href="'.$config->bLink.'?mode=new">Thêm</a></div>';
 } else { ?>
 			<a href="<?php echo $book['link'] ?>" title="<?php echo $book['title'] ?>">
 				<img class="book-thumb" src="<?php echo $book['thumb'] ?>">
@@ -87,9 +88,9 @@
 			</div>
 <?php } ?>
 		</div>
-			
+
 		<div class="clearfix"></div>
 	</div>
-	
+
 	<div class="clearfix"></div>
 </div>

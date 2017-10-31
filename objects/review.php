@@ -2,7 +2,7 @@
 class Review extends Config {
 	private $table_name = "books_reviews";
 	public $isFeed = false;
-	
+
 	public function __construct() {
 		parent::__construct();
 	}
@@ -27,16 +27,16 @@ class Review extends Config {
 
 	function create () {
 		$thumbURL = (isset($this->thumbPath) && $this->thumbPath) ? str_replace(MAIN_PATH, MAIN_URL, $this->thumbPath) : '';
-		
+
 		$query = "INSERT INTO
 					" . $this->table_name . "
 				SET
 					content = ?, rate = ?, iid = ?, uid = ?, to_fb = ?, thumb = ?, title = ?";
 
 		$stmt = $this->conn->prepare($query);
-		
+
 		$this->content = content($this->content);
-		
+
 		// bind values
 		$stmt->bindParam(1, $this->content);
 		$stmt->bindParam(2, $this->rate);
@@ -95,7 +95,7 @@ class Review extends Config {
 					id = :id";
 
 		$stmt = $this->conn->prepare($query);
-		
+
 		// bind parameters
 		$stmt->bindParam(':fb_post_id', $this->fb_post_id);
 		$stmt->bindParam(':id', $this->id);
@@ -133,7 +133,7 @@ class Review extends Config {
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $row;
 	}
-	
+
 	function reply () {
 		$query = "INSERT INTO
 					" . $this->table_name . "_ratings
@@ -141,17 +141,17 @@ class Review extends Config {
 					content = ?, rate = ?, iid = ?, uid = ?";
 
 		$stmt = $this->conn->prepare($query);
-		
+
 		// bind values
 		$stmt->bindParam(1, $this->rContent);
 		$stmt->bindParam(2, $this->rate);
 		$stmt->bindParam(3, $this->id);
 		$stmt->bindParam(4, $this->u);
-		
+
 //		echo $this->table_name.'_ratings ~ '.$this->rContent.' ~ '.$this->rate.' ~ '.$this->id.' ~ '.$this->u;
 
 		if ($stmt->execute()) {
-				// add coin for user who writes this 
+				// add coin for user who writes this
 				$coinsForWhomRated = (COINS_RATE_USER_WRITE_CHAPTER*$this->rate)/5;
 				$this->addCoin($coinsForWhomRated, $this->uid);
 				// add coin for user who rates ($this->u)
@@ -175,37 +175,38 @@ class Review extends Config {
 		}
 		else return false;
 	}
-	
+
 	function make ($row) {
 		$row['link'] = $this->rLink.'/'.$row['id'];
 		$row['author'] = $this->getUserInfo($row['uid']);
 
-		// content 
+		// content
 		$row['content'] = content($row['content']);
 
 		$this->getReviewsRatings($row['id']);
 		$row['ratingsList'] = $this->ratingsList;
 		$row['ratingsNum'] = $row['total'] = $this->rTotal;
 		$row['average'] = $this->rAverage;
-						
+
 		// coins for this review
 		$row['coins'] = $this->rCoins;
-		
+
 		return $row;
 	}
-	
+
 	function readAll ($iid = null, $u = null, $order = null) {
 		if (!$order) $order = "modified DESC, created DESC, id DESC";
 		if (!$iid && $this->iid) $iid = $this->iid;
 		if ($iid) $con[] = "iid = {$iid}";
 		if ($u) $con[] = "uid = {$u}";
+		$con[] = "`show` = 1";
 		$cond = implode(' AND ', $con);
-		
+
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "
-				WHERE 
+				WHERE
 					{$cond}
 				ORDER BY
 					{$order}";
@@ -228,8 +229,8 @@ class Review extends Config {
 					*
 				FROM
 					" . $this->table_name . "
-				WHERE 
-					id = ?
+				WHERE
+					id = ? AND `show` = 1
 				LIMIT 0,1";
 
 		$stmt = $this->conn->prepare($query);
@@ -248,14 +249,14 @@ class Review extends Config {
 			$this->bookTitle = $row['title'];
 			$toFB_link = 'https://www.facebook.com/'.$this->me['oauth_uid'].'/posts/'.$row['fb_post_id'];
 			$this->toFB_html = ($row['fb_post_id']) ? '<a href="'.$toFB_link.'"><i class="fa fa-facebook-square"></i> '.$row['fb_post_id'].'</a>' : null;
-			
+
 			$text = $row['content'];
 //			$row['content'] = content($text);
-			
-//			$breaks = array("<br />","<br>","<br/>");  
-//			$text = str_ireplace($breaks, "\r\n", $text);  
-//			$row['content_feed'] = (strlen($text) > 1500) ? content(substr(htmlspecialchars(strip_tags($text)), 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>' : $row['content'];
-			$row['content_feed'] = (strlen($text) > 1500) ? content(substr(strip_tags($text,'<br>'), 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>' : $row['content'];
+
+//			$breaks = array("<br />","<br>","<br/>");
+//			$text = str_ireplace($breaks, "\r\n", $text);
+//			$row['content_feed'] = (strlen($text) > 1500) ? content(substr(htmlspecialchars(strip_tags($text)), 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
+			$row['content_feed'] = (strlen($text) > 1500) ? content(substr(strip_tags($text,'<br>'), 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
 			$row = $this->make($row);
 
 			// share list
@@ -263,7 +264,7 @@ class Review extends Config {
 /*			$row['share'] = array();
 			if ($row['share']) {
 				$shareAr = explode(',', $row['share']);
-				foreach ($shareAr as $oS) 
+				foreach ($shareAr as $oS)
 					$uShare[] = $this->getUserInfo($oS);
 				$row['share'] = $uShare;
 				$row['shareNum'] = count($shareAr);
@@ -313,7 +314,7 @@ class Review extends Config {
 								), JSON_UNESCAPED_UNICODE)
 					);
 				$this->addNoti($valAr, $this->uid);
-				return true; 
+				return true;
 			}
 			else return false;
 		} else return false;
@@ -322,17 +323,17 @@ class Review extends Config {
 
 	function getReviewsRatings ($id = '', $order = '') {
 		if (!$id) $id = $this->id;
-		
+
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "_ratings
-				WHERE 
+				WHERE
 					iid = ?";
 
 		$valAr = array($id);
 		$this->ratingsList = $this->_getRatings($query, $valAr);
-		
+
 		return $this->ratingsList;
 	}
 
@@ -344,10 +345,10 @@ class Review extends Config {
 		return $num;
 	}
 */
-	
+
 	function getBookInfo ($id = '') {
 		$query = "SELECT
-					id,thumb,title,link,uid,published,status,author,genres
+					id,thumb,title,link,uid,published,status,author,genres,in_storage
 				FROM
 					books
 				WHERE
@@ -367,7 +368,17 @@ class Review extends Config {
 			// author
 			if ($row['uid']) $row['author'] = $this->getUserInfo($row['uid']);
 			else $row['author'] = array('name' => $row['author'], 'link' => $this->auLink.'/'.encodeURL($row['author']));
-			
+
+			if ($row['in_storage']) {
+				/*$donated_users = explode('|', $row['donated_uid']);
+				$row['num_in_storage'] = 0;
+				foreach ($donated_users as $dno) {
+					$dno = explode('-', $dno);
+					$row['num_in_storage'] += $dno[1];
+				}*/
+				$row['num_in_storage'] = $this->countDonationsBookNum($row['id']);
+			}
+
 			// genres
 			if ($row['genres']) {
 				$gnr = explode(',', $row['genres']);
@@ -383,7 +394,7 @@ class Review extends Config {
 					$row['genres'] = $gAr;
 					$row['genresText'] = implode(', ', $gTxtAr);
 				}
-			} 
+			}
 			if (!isset($row['genresText'])) {
 				$row['genres'] = array();
 				$row['genresText'] = '';
@@ -392,14 +403,35 @@ class Review extends Config {
 			$this->getBookReviews($id);
 			$row['averageRate'] = $this->bAverage;
 			$row['totalReview'] = $this->bTotal;
-			
+
 			// status
 			$row['sttText'] = ($row['status'] == 0) ? '<span class="text-success">Đang tiến hành</span>' : '<span class="text-danger">Đã hoàn thành</span>';
 		}
 
 		return $row;
 	}
-	
+
+	function countDonationsBookNum ($bid = null) {
+		if ($bid) {
+		$query = "SELECT
+					id,num
+				FROM
+					donations
+				WHERE
+					bid = ?";
+
+		$stmt = $this->conn->prepare($query);
+		$stmt->bindParam(1, $bid);
+		$stmt->execute();
+
+		$num = 0;
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$num += $row['num'];
+		}
+		} else $num = 0;
+		return $num;
+	}
+
 	function getBookList () {
 		$query = "SELECT
 					id,title,link,uid,authenticated
@@ -407,7 +439,7 @@ class Review extends Config {
 					books
 				WHERE
 					type = 0 AND status = 1
-				ORDER BY 
+				ORDER BY
 					title ASC";
 
 		$stmt = $this->conn->prepare($query);
@@ -422,7 +454,7 @@ class Review extends Config {
 
 		return $this->bookList;
 	}
-	
+
 	function sGetBookInfo ($id = '') {
 		$query = "SELECT
 					title,link,uid
@@ -445,7 +477,7 @@ class Review extends Config {
 
 		return $row;
 	}
-	
+
 	function getBookGenre ($g = 0) {
 		$g = intval(preg_replace('/[^0-9]+/', '', $g), 10);
 		$query = "SELECT
@@ -463,18 +495,18 @@ class Review extends Config {
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$row['link'] = $this->gnLink.'/'.$row['link'];
-		
+
 		return $row;
 	}
-	
+
 	function getBookReviews ($iid = '', $order = '') {
 		if (!$order) $order = "modified DESC, created DESC, id DESC";
-		
+
 		$query = "SELECT
 					rate
 				FROM
 					books_reviews
-				WHERE 
+				WHERE
 					iid = ?
 				ORDER BY
 					{$order}";
@@ -498,7 +530,7 @@ class Review extends Config {
 
 		$this->bAverage = number_format($averageRate, 1);
 		$this->bTotal = $totalReview;
-		
+
 		return $stmt;
 	}
 
@@ -516,7 +548,7 @@ class Review extends Config {
 					id = :id";
 
 		$stmt = $this->conn->prepare($query);
-		
+
 		// bind parameters
 		$stmt->bindParam(':content', $this->content);
 		$stmt->bindParam(':rate', $this->rate);

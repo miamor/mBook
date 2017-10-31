@@ -2,7 +2,7 @@
 class Search extends Config {
 	protected $table_name = "books";
 	public $isFeed = false;
-	
+
 	public function __construct() {
 		parent::__construct();
 		require_once(MAIN_PATH.'/include/html_dom.php');
@@ -31,19 +31,19 @@ class Search extends Config {
 
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$row['download'] = explode('|', str_replace('&amp;', '&', $row['download']));
-		
+
 		return $row;
 	}
 
 	protected function getReviewsList ($id = '', $order = '') {
 		if (!$order) $order = "modified DESC, created DESC, id DESC";
 		if (!$id) $id = $this->id;
-		
+
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "_reviews
-				WHERE 
+				WHERE
 					iid = ?
 				ORDER BY
 					{$order}";
@@ -60,11 +60,11 @@ class Search extends Config {
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 						$row['link'] = $this->rLink.'/'.$row['id'];
 			$row['author'] = $this->getUserInfo($row['uid']);
-			
+
 			$cont = htmlspecialchars(strip_tags($row['content']));
-			$row['short_content'] = (strlen($cont) > 280) ? content(substr($cont, 0, 280)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>' : $row['content'];
-			$row['content_feed'] = (strlen($cont) > 1500) ? content(substr($cont, 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>' : $row['content'];
-			
+			$row['short_content'] = (strlen($cont) > 280) ? content(substr($cont, 0, 280)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
+			$row['content_feed'] = (strlen($cont) > 1500) ? content(substr($cont, 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
+
 			$totalReview++;
 			$totalRates += $row['rate'];
 
@@ -72,10 +72,10 @@ class Search extends Config {
 			$row['ratingsNum'] = count($row['ratingsList']);
 			$row['average'] = $this->rAverage;
 			$row['total'] = $this->rTotal;
-*/			
+*/
 			if (!isset($rateAr[$row['rate']])) $rateAr[$row['rate']] = 0;
 			else $rateAr[$row['rate']]++;
-			
+
 			$this->ratingsList[] = $row;
 		}
 
@@ -88,19 +88,19 @@ class Search extends Config {
 			$this->detailReview['local'] = $rateAr;
 		}
 		$this->averageRate['local'] = number_format($averageRate, 1);
-		
+
 		if ($totalReview > 0) return $this->ratingsList;
 		return false;
 	}
 
 	protected function getReviews ($id = '') {
 		if (!$id) $id = $this->id;
-		
+
 		$query = "SELECT
 					id,rate
 				FROM
 					" . $this->table_name . "_reviews
-				WHERE 
+				WHERE
 					iid = ?";
 
 		$stmt = $this->conn->prepare($query);
@@ -112,13 +112,13 @@ class Search extends Config {
 		$totalRates = 0;
 		$this->ratingsList = array();
 		$rateAr = array();
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {			
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$totalReview++;
 			$totalRates += $row['rate'];
 
 			if (!isset($rateAr[$row['rate']])) $rateAr[$row['rate']] = 0;
 			else $rateAr[$row['rate']]++;
-			
+
 			$this->ratingsList[] = $row;
 		}
 
@@ -130,13 +130,13 @@ class Search extends Config {
 		$this->averageRate['local'] = number_format($averageRate, 1);
 		$this->totalReview['local'] = $totalReview;
 		$this->detailReview['local'] = $rateAr;
-		
+
 		return true;
 	}
 
 	function search () {
 		$this->averageRate['local'] = $this->averageRate['goodreads'] = $this->totalReview['local'] = $this->totalReview['goodreads'] = 0;
-		
+
 		$this->detailReview = array(
 			'local' => array(
 				1 => 0,
@@ -153,7 +153,7 @@ class Search extends Config {
 				5 => 0
 			)
 		);
-		
+
 		// searchLocal
 		$local = $this->searchLocal();
 		if ($local['id']) {
@@ -165,18 +165,18 @@ class Search extends Config {
 			$this->ISBN = $local['isbn'];
 			// if isbn13 is updated, then use thia func to load ratings only
 			$goodreads_ratings = $this->getGoodreadsRating();
-		} 
+		}
 		else {
 			// or else whole goodreads book data must be fetched
 			$goodreads = $this->searchGoodreads();
 			$this->ISBN = $goodreads['isbn13'];
 		}
-		
+
 		//print_r($local);
 		$rvWidget = $goodreads['reviews_widget'];
 		unset($goodreads['reviews_widget']);
 		$data['goodreads'] = $goodreads;
-		
+
 		$data['title'] = ($local && $local['title']) ? $local['title'] : $goodreads['title'];
 		$data['des'] = ($local && $local['des']) ? $local['des'] : $goodreads['des'];
 		$data['genres'] = ($local && $local['genres']) ? $local['genres'] : null;
@@ -185,11 +185,11 @@ class Search extends Config {
 
 		if ($this->averageRate['local'] > 0 && $this->averageRate['goodreads'] > 0)
 			$average = ($this->averageRate['local'] + $this->averageRate['goodreads'])/2;
-		else if ($this->averageRate['goodreads'] > 0) 
+		else if ($this->averageRate['goodreads'] > 0)
 			$average = $this->averageRate['goodreads'];
-		else 
+		else
 			$average = $this->averageRate['local'];
-			
+
 		$total = ($this->totalReview['local'] + $this->totalReview['goodreads']);
 
 		for ($i = 1; $i <= 5; $i++) {
@@ -220,8 +220,8 @@ class Search extends Config {
 		$this->response = $data;
 		return $data;
 	}
-	
-	
+
+
 	function updateISBN () {
 		$query = "SELECT id,title,isbn FROM books WHERE id >= 65";
 		$stmt = $this->conn->prepare($query);
@@ -244,29 +244,29 @@ class Search extends Config {
 	}
 	function updateISBN_one ($bid, $ISBN) {
 		$query = "UPDATE books SET
-				isbn = ? 
+				isbn = ?
 			WHERE id = ?";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $ISBN);
 		$stmt->bindParam(2, $bid);
 		$stmt->execute();
 	}
-	
-	
+
+
 	function getGoodreadsRating () {
 		// review counts (json)
 		// https://www.goodreads.com/book/review_counts.json?key='.GOODREADS_KEY.'&isbns=9780749394820
 		$data = file_get_contents('https://www.goodreads.com/book/review_counts.json?key='.GOODREADS_KEY.'&isbns='.$this->ISBN);
 }
-	
+
 	function searchGoodreads () {
 		// get book id by title
 //		$url = 'https://www.goodreads.com/book/title.xml?key='.GOODREADS_KEY.'&title='.str_replace(' ', '%20', $this->keyword);
 		$this->url = $url = 'https://www.goodreads.com/book/title.xml?key='.GOODREADS_KEY.'&title='.urlencode($this->keyword);
 		$xml_string = file_get_contents($url);
-		
+
 		if (!$xml_string) return false;
-		
+
 		$xml = simplexml_load_string($xml_string, 'SimpleXMLElement', LIBXML_NOCDATA);
 		$json = json_encode($xml);
 		$array = json_decode($json, TRUE);
@@ -280,7 +280,7 @@ class Search extends Config {
 		unset($bIn['asin']);
 		unset($bIn['kindle_asin']);
 		unset($bIn['marketplace_id']);
-		
+
 /*		$this->averageRate['goodreads'] = $bIn['average_rating'];
 		$this->totalReview['goodreads'] = $bIn['ratings_count'];
 		$detailReview = $bIn['work']['rating_dist'];
@@ -310,18 +310,18 @@ class Search extends Config {
 
 //		$result = $bIn;
 		$workPublicationDay = '';
-		if (!is_array($bIn['work']['original_publication_day'])) 
+		if (!is_array($bIn['work']['original_publication_day']))
 			$workPublicationDay .= $bIn['work']['original_publication_day'].'/';
-		if (!is_array($bIn['work']['original_publication_month'])) 
+		if (!is_array($bIn['work']['original_publication_month']))
 			$workPublicationDay .= $bIn['work']['original_publication_month'].'/';
-		if (!is_array($bIn['work']['original_publication_year'])) 
+		if (!is_array($bIn['work']['original_publication_year']))
 			$workPublicationDay .= $bIn['work']['original_publication_year'];
 		$bookPublicationDay = '';
-		if (!is_array($bIn['publication_day'])) 
+		if (!is_array($bIn['publication_day']))
 			$bookPublicationDay .= $bIn['publication_day'].'/';
-		if (!is_array($bIn['publication_month'])) 
+		if (!is_array($bIn['publication_month']))
 			$bookPublicationDay .= $bIn['publication_month'].'/';
-		if (!is_array($bIn['publication_year'])) 
+		if (!is_array($bIn['publication_year']))
 			$bookPublicationDay .= $bIn['publication_year'];
 		$result = array(
 			'id' => $bIn['id'],
@@ -342,33 +342,33 @@ class Search extends Config {
 			),
 			'reviews_widget' => $bIn['reviews_widget'],
 		);
-		
+
 		$bookID = $result['id'];
-		
+
 /*		// get description and other info of book and work
 		$bookXml = file_get_contents('https://www.goodreads.com/book/show/'.$bookID.'.xml?key='.GOODREADS_KEY);
 //		echo $bookXml.' - fuck';
 		$bIn = json_decode(json_encode(simplexml_load_string($bookXml, 'SimpleXMLElement', LIBXML_NOCDATA)), TRUE);
 		$bIn = $bIn['id'];
 		print_r($bIn);
-*/				
+*/
 		return $result;
 	}
 
 	function searchGoogle () {
-		
+
 		// Query the book database by ISBN code.
-//		isbn = isbn || "9781451648546"; // Steve Jobs book 
+//		isbn = isbn || "9781451648546"; // Steve Jobs book
 		$this->ISBN = 8936024916299;
 		if ($this->ISBN) {
 			$url = "https://www.googleapis.com/books/v1/volumes?q=isbn:".$this->ISBN;
 			$json = file_get_contents($url);
 			$result = json_decode($json, TRUE);
-			
+
 			if ($result['totalItems']) {
 				// There'll be only 1 book per ISBN
 				$book = $result['items'][0];
-				
+
 				$title = ($book["volumeInfo"]["title"]);
 				$subtitle = ($book["volumeInfo"]["subtitle"]);
 				$authors = ($book["volumeInfo"]["authors"]);
@@ -377,10 +377,10 @@ class Search extends Config {
 				$publisher = ($book["volumeInfo"]["publisher"]);
 				$publishedDate = ($book["volumeInfo"]["publishedDate"]);
 				$webReaderLink = ($book["accessInfo"]["webReaderLink"]);
-				
+
 				// For debugging
 				print_r($book);
-			
+
 			}
 		}
 	}
@@ -451,7 +451,7 @@ class Search extends Config {
 
 		return $this->book_coverCode;
 	}
-	
+
 	function getBooksToGetCover () {
 		$query = "SELECT title,cover_code FROM
 					boxes_books
@@ -465,7 +465,7 @@ class Search extends Config {
 		}
 		return $this->booksList;
 	}
-	
+
 	function searchByCover () {
 		if (!$this->book_coverCode) $this->getCoverCode();
 		$thisCoverCode = substr($this->book_coverCode, 0, -4);

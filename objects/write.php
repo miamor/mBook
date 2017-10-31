@@ -39,7 +39,7 @@ class Write extends BookWrite {
 		$con = array();
 		if ($from_record_num) $lim = "LIMIT
 					{$from_record_num}, {$records_per_page}";
-		
+
 		$con[] = 'uid != 0';
 		if ($auth && $auth != -1) $con[] = 'authenticated = '.$auth;
 
@@ -63,9 +63,9 @@ class Write extends BookWrite {
 		}
 
 		$con[] = '`show` = 1';
-		
+
 		if ($con) $cond = 'WHERE '.implode(' AND ', $con);
-					
+
 		if (!$order) $order = "modified DESC, created DESC, id DESC";
 
 		$query = "SELECT
@@ -76,7 +76,7 @@ class Write extends BookWrite {
 				ORDER BY
 					{$order}
 				{$lim}";
-		
+
 		$stmt = $this->conn->prepare($query);
 
 		$stmt->execute();
@@ -86,12 +86,12 @@ class Write extends BookWrite {
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$thelink = ($row['authenticated'] == 1) ? $this->bLink : $this->wLink;
 			$row['link'] = $thelink.'/'.$row['link'];
-			
+
 			// author
 			if ($row['uid']) $row['author'] = $this->getUserInfo($row['uid']);
 			else $row['author'] = array('name' => $row['author'], 'link' => $this->auLink.'/'.encodeURL($row['author']));
-			
-//			$row['des'] = content(substr(htmlspecialchars(strip_tags($row['des'])), 0, 240)).'... <a href="'.$row['link'].'" class="small">See more</a>';
+
+//			$row['des'] = content(substr(htmlspecialchars(strip_tags($row['des'])), 0, 240)).'... <a href="'.$row['link'].'" class="small">Xem đầy đủ</a>';
 
 			// share list
 /*			$row['shareNum'] = 0;
@@ -99,7 +99,7 @@ class Write extends BookWrite {
 			if ($row['share']) {
 				$shareAr = explode(',', $row['share']);
 				$uShare = array();
-				foreach ($shareAr as $oS) 
+				foreach ($shareAr as $oS)
 					$uShare[] = $this->getUserInfo($oS);
 				$row['share'] = $uShare;
 				$row['shareNum'] = count($shareAr);
@@ -120,7 +120,7 @@ class Write extends BookWrite {
 					$row['genres'] = $gAr;
 					$row['genresText'] = implode(', ', $gTxtAr);
 				}
-			} 
+			}
 			if (!isset($row['genresText'])) {
 				$row['genres'] = array();
 				$row['genresText'] = '';
@@ -130,7 +130,7 @@ class Write extends BookWrite {
 			$this->getReviews($row['id']);
 			$row['averageRate'] = $this->averageRate;
 			$row['totalReview'] = $this->totalReview;
-			
+
 			// status
 			if ($row['type'] == 0) $row['sttText'] = ($row['status'] == 0) ? '<span class="text-success">Đang tiến hành</span>' : '<span class="text-danger">Đã hoàn thành</span>';
 			else $row['sttText'] = ($row['status'] == 0) ? '<span class="text-success">Mở</span>' : '<span class="text-danger">Khóa</span>';
@@ -144,10 +144,10 @@ class Write extends BookWrite {
 
 		return $stmt;
 	}
-	
+
 	function countAll ($auth = -1, $genresAr = null, $authorAr = null, $keyword) {
 		$con = array();
-					
+
 		$con[] = 'uid != 0';
 		if ($auth && $auth != -1) $con[] = 'authenticated = '.$auth;
 
@@ -173,13 +173,13 @@ class Write extends BookWrite {
 		$con[] = '`show` = 1';
 
 		if ($con) $cond = 'WHERE '.implode(' AND ', $con);
-		
+
 		$query = "SELECT
 					id
 				FROM
 					" . $this->table_name . "
 				{$cond}";
-		
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
 
@@ -213,34 +213,34 @@ class Write extends BookWrite {
 			$this->link = $row['link'] = $this->wLink.'/'.$row['link'];
 			$this->title = $row['title'];
 			$this->type = $row['type'];
-			
+
 			// des
 			$row['des'] = content($row['des']);
 
 			// is published
 			if ($row['published'] == 0) {
 				$rq = explode(',', $row['requests']);
-				foreach ($rq as $ro) 
+				foreach ($rq as $ro)
 					$rqAr[] = $this->getUserInfo($ro);
 				$row['requests'] = $rqAr;
 			}
-			
+
 			// share list
 			$row['shareNum'] = 0;
 			$row['share'] = array();
 			if ($row['share']) {
 				$shareAr = explode(',', $row['share']);
 				$uShare = array();
-				foreach ($shareAr as $oS) 
+				foreach ($shareAr as $oS)
 					$uShare[] = $this->getUserInfo($oS);
 				$row['share'] = $uShare;
 				$row['shareNum'] = count($shareAr);
 			}
-			
+
 			// author
 			if ($row['uid']) $row['author'] = $this->getUserInfo($row['uid']);
 			else $row['author'] = array('name' => $row['author'], 'link' => $this->auLink.'/'.encodeURL($row['author']));
-			
+
 			// genres
 			if ($row['genres']) {
 				$gnr = explode(',', $row['genres']);
@@ -256,7 +256,7 @@ class Write extends BookWrite {
 					$row['genres'] = $gAr;
 					$row['genresText'] = implode(', ', $gTxtAr);
 				}
-			} 
+			}
 			if (!isset($row['genresText'])) {
 				$row['genres'] = array();
 				$row['genresText'] = '';
@@ -273,15 +273,15 @@ class Write extends BookWrite {
 				$row['quotesAr'] = explode('[!#!]', content($row['quotes']));
 				$row['quotesNum'] = count($row['quotesAr']);
 			}
-			
+
 			// ratings
 			$this->getReviews();
 			$row['ratingsList'] = $this->ratingsList;
 			$row['ratingsNum'] = count($this->ratingsList);
 		}
-		
+
 		return $row;
 	}
-	
+
 }
 ?>

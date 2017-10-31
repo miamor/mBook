@@ -18,7 +18,7 @@ class BookWrite extends Config {
 	}
 
 	function sReadOne () {
-		$query = "SELECT id FROM
+		$query = "SELECT id,type,link FROM
 					" . $this->table_name . "
 				WHERE
 					title = ?
@@ -27,10 +27,27 @@ class BookWrite extends Config {
 		$stmt->bindParam(1, $this->title);
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		$this->link = $this->wLink.'/'.$row['link'];
+		if ($row['type'] == 1) $this->link = $this->wLink.'/'.$row['link'];
+		else $this->link = $this->bLink.'/'.$row['link'];
 		return $row;
 	}
-	
+
+	function sReadOneByID ($id = null) {
+		if (!$id) $id = $this->id;
+		$query = "SELECT id,type,link,title,thumb FROM
+					" . $this->table_name . "
+				WHERE
+					id = ?
+				LIMIT 0,1";
+		$stmt = $this->conn->prepare($query);
+		$stmt->bindParam(1, $id);
+		$stmt->execute();
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		if ($row['type'] == 1) $row['link'] = $this->wLink.'/'.$row['link'];
+		else $row['link'] = $this->bLink.'/'.$row['link'];
+		return $row;
+	}
+
 	public function showPages ($pStart, $records, $pages, $activeSt) {
 		$pageHTML = '';
 		for ($p = $pStart; $p <= $pages; $p++) {
@@ -63,7 +80,7 @@ class BookWrite extends Config {
 		$row['link'] = $this->gnLink.'/'.$row['link'];
 		return $row;
 	}
-	
+
 	protected function countChapters ($iid) {
 		if (!$iid) $iid = $this->id;
 		$query = "SELECT id FROM " . $this->table_name . "_chapters WHERE iid = ?";
@@ -102,12 +119,12 @@ class BookWrite extends Config {
 	protected function getReviews ($id = '', $order = '') {
 		if (!$order) $order = "modified DESC, created DESC, id DESC";
 		if (!$id) $id = $this->id;
-		
+
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "_reviews
-				WHERE 
+				WHERE
 					iid = ?
 				ORDER BY
 					{$order}";
@@ -123,12 +140,12 @@ class BookWrite extends Config {
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$row['link'] = $this->rLink.'/'.$row['id'];
 			$row['author'] = $this->getUserInfo($row['uid']);
-			
-//			$row['content'] = content(substr($row['content'], 0, 1200)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>';
+
+//			$row['content'] = content(substr($row['content'], 0, 1200)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>';
 			$cont = htmlspecialchars(strip_tags($row['content']));
-			$row['short_content'] = (strlen($cont) > 280) ? content(substr($cont, 0, 280)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>' : $row['content'];
-			$row['content_feed'] = (strlen($cont) > 1500) ? content(substr($cont, 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>' : $row['content'];
-			
+			$row['short_content'] = (strlen($cont) > 280) ? content(substr($cont, 0, 280)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
+			$row['content_feed'] = (strlen($cont) > 1500) ? content(substr($cont, 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
+
 			$totalReview++;
 			$totalRates += $row['rate'];
 
@@ -136,13 +153,13 @@ class BookWrite extends Config {
 			$row['ratingsNum'] = count($row['ratingsList']);
 			$row['average'] = $this->rAverage;
 			$row['total'] = $this->rTotal;
-						
+
 			// share list
 			$row['shareNum'] = 0;
 			$row['share'] = array();
 			if ($row['share']) {
 				$shareAr = explode(',', $row['share']);
-				foreach ($shareAr as $oS) 
+				foreach ($shareAr as $oS)
 					$uShare[] = $this->getUserInfo($oS);
 				$row['share'] = $uShare;
 				$row['shareNum'] = count($shareAr);
@@ -150,7 +167,7 @@ class BookWrite extends Config {
 
 			// coins for this review
 			$row['coins'] = $this->rCoins;
-			
+
 			$this->ratingsList[] = $row;
 		}
 
@@ -161,18 +178,18 @@ class BookWrite extends Config {
 
 		$this->averageRate = number_format($averageRate, 1);
 		$this->totalReview = $totalReview;
-		
+
 		return $stmt;
 	}
 
 	protected function getReviewsRatings ($id = '', $order = '') {
 		if (!$order) $order = "modified DESC, created DESC, id DESC";
-		
+
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "_reviews_ratings
-				WHERE 
+				WHERE
 					iid = ?
 				ORDER BY
 					{$order}";
@@ -194,7 +211,7 @@ class BookWrite extends Config {
 
 			$totalReview++;
 			$totalRates += $row['rate'];
-			
+
 			// set coins for review got rated
 			$row['coins'] = 5;
 			$this->rCoins += $row['coins'];
@@ -209,7 +226,7 @@ class BookWrite extends Config {
 
 		$this->rAverage = number_format($averageRate, 1);
 		$this->rTotal = $totalReview;
-		
+
 		return $ratingsList;
 	}
 
@@ -242,14 +259,14 @@ class BookWrite extends Config {
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query
-		if ($stmt->execute()) return true; 
+		if ($stmt->execute()) return true;
 		else return false;
 	}
 
 	public function delete() {
 
 		$query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
-		
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
 

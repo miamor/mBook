@@ -21,14 +21,14 @@ class Feed extends Config {
 	function fetchFeed ($type, $u = null, $page = 0) {
 		$typ = ($type == 'status') ? '' : $type;
 		$order = "modified DESC, created DESC, id DESC";
-		
+
 		$numPerPage = 10;
 		$start = $page*$numPerPage;
 		$lim = "LIMIT {$start}, {$numPerPage}";
 
 		$query = "SELECT uid,type,id,iid,bid,ilink,gid,created,content FROM
-					" . $this->table_name . " 
-				WHERE 
+					" . $this->table_name . "
+				WHERE
 					uid = ? AND type = ?
 				ORDER BY
 					{$order}
@@ -50,7 +50,7 @@ class Feed extends Config {
 						$gMem = $gIn['members'];
 					//	if (!check('['.$this->u.']', $gMem)) $ok = false;
 					}
-					if (!isset($row['href']) || !$row['href']) 
+					if (!isset($row['href']) || !$row['href'])
 						$row['href'] = 'status/'.$row['iid'];
 				} else if ($row['type'] == 'addbookbox') {
 					$row['href'] = 'box/'.$row['bid'].'?b='.$row['iid'];
@@ -73,7 +73,7 @@ class Feed extends Config {
 
 		return $this->all_list;
 	}
-	
+
 	function sGroup ($gid) {
 	}
 
@@ -102,10 +102,10 @@ class Feed extends Config {
 			else $con[] = "type = '{$type}'";
 		}
 		else $con[] = " type != 'addbookbox' AND type != 'buy' AND type != 'addbox' ";
-		
+
 		$cons = array();
 		if (isset($con)) $cons[] = implode(' OR ', $con);
-		
+
 /*		if ($u) $cons[] = "uid = {$u}";
 		else $cons[] = "uid != 0";
 */
@@ -117,12 +117,12 @@ class Feed extends Config {
 		$numPerPage = 2;
 		$start = $page*$numPerPage;
 
-		$qr = "SELECT t1.* 
+		$qr = "SELECT t1.*
 		FROM " . $this->table_name . " t1
 			JOIN (SELECT uid,MAX(id) id FROM " . $this->table_name . " GROUP BY uid,type) t2
-			ON t1.id = t2.id AND t1.uid = t2.uid 
+			ON t1.id = t2.id AND t1.uid = t2.uid
 		WHERE {$cond}
-		ORDER BY {$order} 
+		ORDER BY {$order}
 		LIMIT {$start}, {$numPerPage}";
 //		echo $qr;
 
@@ -150,12 +150,12 @@ class Feed extends Config {
 				$oneU['href'] = $this->makeHref($type, $iid, $oneU['ilink'], $oneU['bid']);
 				$this->all_list[$uid.'_'.$type][] = $oneU;
 			}
-			
+
 			$query = "SELECT * FROM
-						" . $this->table_name . " 
-					WHERE 
+						" . $this->table_name . "
+					WHERE
 						(uid = ? AND type = ? AND iid != ? AND id != ?)
-						AND 
+						AND
 						({$cond})
 					ORDER BY
 						{$order}
@@ -166,7 +166,7 @@ class Feed extends Config {
 			$stmt->bindParam(3, $iid);
 			$stmt->bindParam(4, $id);
 			$stmt->execute();
-			
+
 			while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 				$ok = true;
 				$riid = ($type == 'status') ? $row['id'] : $row['iid'];
@@ -205,12 +205,12 @@ class Feed extends Config {
 	function getReviews ($id) {
 		if (!$order) $order = "modified DESC, created DESC, id DESC";
 		if (!$id) $id = $this->id;
-		
+
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "_reviews
-				WHERE 
+				WHERE
 					iid = ?
 				ORDER BY
 					{$order}";
@@ -226,10 +226,10 @@ class Feed extends Config {
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $row['link'] = $this->rLink.'/'.$row['id'];
 			$row['author'] = $this->getUserInfo($row['uid']);
-			
-			$row['content'] = content(substr($row['content'], 0, 1200)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>';
-			$row['short_content'] = content(substr(htmlspecialchars(strip_tags($row['content'])), 0, 280)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">See more</a>';
-			
+
+			$row['content'] = content(substr($row['content'], 0, 1200)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>';
+			$row['short_content'] = content(substr(htmlspecialchars(strip_tags($row['content'])), 0, 280)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>';
+
 			$totalReview++;
 			$totalRates += $row['rate'];
 
@@ -237,13 +237,13 @@ class Feed extends Config {
 			$row['ratingsNum'] = count($row['ratingsList']);
 			$row['average'] = $this->rAverage;
 			$row['total'] = $this->rTotal;
-						
+
 			// share list
 			$row['shareNum'] = 0;
 			$row['share'] = array();
 			if ($row['share']) {
 				$shareAr = explode(',', $row['share']);
-				foreach ($shareAr as $oS) 
+				foreach ($shareAr as $oS)
 					$uShare[] = $this->sGetUserInfo($oS);
 				$row['share'] = $uShare;
 				$row['shareNum'] = count($shareAr);
@@ -251,7 +251,7 @@ class Feed extends Config {
 
 			// coins for this review
 			$row['coins'] = $this->rCoins;
-			
+
 			$this->ratingsList[] = $row;
 		}
 
@@ -262,18 +262,18 @@ class Feed extends Config {
 
 		$this->averageRate = number_format($averageRate, 1);
 		$this->totalReview = $totalReview;
-		
+
 		return $stmt;
 	}
 
 	function getReviewsRatings ($id) {
 		if (!$order) $order = "modified DESC, created DESC, id DESC";
-		
+
 		$query = "SELECT
 					*
 				FROM
 					" . $this->table_name . "_reviews_ratings
-				WHERE 
+				WHERE
 					iid = ?
 				ORDER BY
 					{$order}";
@@ -295,7 +295,7 @@ class Feed extends Config {
 
 			$totalReview++;
 			$totalRates += $row['rate'];
-			
+
 			// set coins for review got rated
 			$row['coins'] = 5;
 			$this->rCoins += $row['coins'];
@@ -310,12 +310,12 @@ class Feed extends Config {
 
 		$this->rAverage = number_format($averageRate, 1);
 		$this->rTotal = $totalReview;
-		
+
 		return $ratingsList;
 	}
 
-	
-	
+
+
 	function update() {
 
 		$query = "UPDATE
@@ -345,7 +345,7 @@ class Feed extends Config {
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query
-		if ($stmt->execute()) return true; 
+		if ($stmt->execute()) return true;
 		else return false;
 	}
 
@@ -353,7 +353,7 @@ class Feed extends Config {
 	function delete() {
 
 		$query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
-		
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
 

@@ -61,6 +61,19 @@
 		<div class="clearfix"></div>
 	</div>
 
+	<div class="form-group">
+		<div class="col-lg-3 no-padding-left">Published</div>
+		<div class="col-lg-9 no-padding">
+			<label class="radio col-lg-3">
+				<input type="radio" value="1" checked name="published"/> Yes
+			</label>
+			<label class="radio col-lg-3">
+				<input type="radio" value="0" name="published"/> No
+			</label>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
 	<div class="add-form-submit center">
 		<input type="reset" value="Reset" class="btn btn-default">
 		<input type="submit" value="Submit" class="btn btn-red">

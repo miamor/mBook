@@ -43,7 +43,7 @@ class Group extends Config {
 	function checkMyJoin () {
 		return in_array($this->u, $this->members);
 	}
-	
+
 	function join () {
 		$members = $this->members_txt.' ['.$this->u.']';
 		$this->members_txt = str_replace(' ', ',', trim($members));
@@ -63,7 +63,7 @@ class Group extends Config {
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query
-		if ($stmt->execute()) return true; 
+		if ($stmt->execute()) return true;
 		else return false;
 	}
 
@@ -88,7 +88,7 @@ class Group extends Config {
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query
-		if ($stmt->execute()) return true; 
+		if ($stmt->execute()) return true;
 		else return false;
 	}
 
@@ -97,7 +97,7 @@ class Group extends Config {
 		$con = array();
 		if ($from_record_num) $lim = "LIMIT
 					{$from_record_num}, {$records_per_page}";
-					
+
 		if (!$order) $order = "modified DESC, created DESC, id DESC";
 
 		$query = "SELECT
@@ -110,7 +110,7 @@ class Group extends Config {
 					{$order}
 				{$lim}";
 
-		
+
 		$stmt = $this->conn->prepare($query);
 
 		$stmt->execute();
@@ -121,8 +121,8 @@ class Group extends Config {
 			$row['link'] = $this->grLink.'/'.$row['code'];
 			// creator
 			$row['creator'] = $this->getUserInfo($row['uid']);
-			
-			$row['des'] = content(substr(htmlspecialchars(strip_tags($row['des'])), 0, 240)).'... <a href="'.$row['link'].'" class="small">See more</a>';
+
+			$row['des'] = content(substr(htmlspecialchars(strip_tags($row['des'])), 0, 240)).'... <a href="'.$row['link'].'" class="small">Xem đầy đủ</a>';
 
 			// members list
 			$row['memNum'] = 0;
@@ -166,11 +166,11 @@ class Group extends Config {
 		$this->id = $row['id'];
 		$this->members = array();
 		$this->isMember = null;
-		
+
 		if ($row['id']) {
 			$this->link = $row['link'] = $this->grLink.'/'.$row['code'];
 			$this->title = $row['title'];
-			
+
 			// des
 			$row['des'] = content($row['des']);
 
@@ -201,10 +201,10 @@ class Group extends Config {
 			else if ($row['status'] == 1) $row['sttText'] = '<span class="text-warning">Đóng</span>';
 			else $row['sttText'] = '<span class="text-success">Mở</span>';
 		}
-		
+
 		return $row;
 	}
-	
+
 
 	function update() {
 
@@ -235,7 +235,7 @@ class Group extends Config {
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query
-		if ($stmt->execute()) return true; 
+		if ($stmt->execute()) return true;
 		else return false;
 	}
 
@@ -243,7 +243,7 @@ class Group extends Config {
 	function delete() {
 
 		$query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
-		
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
 

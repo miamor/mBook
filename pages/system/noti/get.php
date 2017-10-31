@@ -8,7 +8,7 @@ foreach ($notiList as $oneNoti) {
 	if ($from_uid) echo '<img class="one-noti-user-avatar" src="'.$author['avatar'].'"/>';
 	echo '<div class="one-noti-content">';
 //	echo '['.$type.'] ';
-	
+
 	if ($type == 'welcome') {
 		$icon = 'bullhorn';
 		echo 'Chào mừng bạn đến với mBook. Hãy xem qua hướng dẫn của chúng tôi để bắt đầu! <a class="noti-post-link" href="'.MAIN_URL.'/start">Start <i class="fa fa-caret-square-o-right"></i></a>';
@@ -44,7 +44,7 @@ foreach ($notiList as $oneNoti) {
 	else if ($type == 'new-review') {
 		$img = '<img style="margin-top:-6px" src="'.IMG.'/silk/coins.png"/>';
 		$icon = 'check';
-		echo 'Bạn được cộng thêm '.$img.'<b>'.$content['coins_added'].'</b> vì thêm một <a href="'.$iid.'">review mới cho sách "'.$content['book_title'].'"</a> thành công.';
+		echo 'Bạn được cộng thêm '.$img.'<b>'.$content['coins_added'].'</b> vì thêm một <a href="'.$config->rLink.'/'.$iid.'">review mới cho sách "'.$content['book_title'].'"</a> thành công.';
 	}
 
 	echo '</div>'; // one-noti-content

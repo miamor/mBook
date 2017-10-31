@@ -20,7 +20,7 @@ if ($n) {
 
 	if ($book->id) {
 		$page_title = $title;
-		
+
 		if (!$vPage || ($vPage == 'chapters' && !$m)) {
 			// get chapters
 			$chapter->bid = $book->id;
@@ -29,17 +29,17 @@ if ($n) {
 			$bChapters = $chapter->bChapters;
 			$booksBuyList = $book->getSellStores();
 		}
-		
+
 		if ($vPage == 'chapters') {
 			if ($m) {
 				// get chapter data
 				$chapter->bid = $book->id;
 				$chapter->bookLink = $book->link;
 				$chapter->id = $m;
-				if ($temp == 'feed') $chapter->isFeed = true; 
+				if ($temp == 'feed') $chapter->isFeed = true;
 				$byID = ($config->get('byID')) ? true : false;
 				$bChap = $chapter->readOne($byID);
-		
+
 				$page_title = $bChap['title'];
 			} else $page_title = $title.' danh sách chương';
 		} else if ($vPage == 'reviews') {
@@ -58,11 +58,15 @@ if ($n) {
 
 if ($do) include 'pages/system/write/'.$do.'.php';
 else if ($mode) {
-//	if ($uid === $config->u || $config->me['is_mod'] === 1) 
+//	if ($uid === $config->u || $config->me['is_mod'] === 1)
 	include 'views/book/'.$mode.'.php';
 } else if ($n) {
 	if ($book->id) {
 		include 'views/'.$page.'/view.php';
+	} else if ($config->get('justadd')) {
+		$pageTitle = 'Post chưa được confirm';
+		include 'views/_temp/header.php';
+		echo '<div class="alerts alert-warning">Bài post bạn vừa gửi đang được đưa vào hàng chờ. Từ giờ đến khi bài đăng được duyệt sẽ không được public. <br/>Bạn sẽ nhận được thông báo khi bài đăng này được duyệt.</div>';
 	} else {
 		include 'views/error.php';
 	}
