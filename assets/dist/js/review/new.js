@@ -1,4 +1,5 @@
-$(document).ready(function () {
+function newReview () {
+	$('.feed-rv-book').show();
 	rate(".new-review");
 	$('#notfindbook').click(function () {
 		$('.book-select').attr('disabled', true).trigger('chosen:updated');
@@ -21,4 +22,8 @@ $(document).ready(function () {
 			$(".feed-rv-book").html(data);
 		});
 	})
+}
+
+$(document).ready(function () {
+	newReview();
 })

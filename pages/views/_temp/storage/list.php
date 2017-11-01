@@ -34,12 +34,13 @@
 		<div class="letter-books">
 	<?php foreach ($_List[$oneLetter] as $bO) { ?>
 			<div class="one-book-storage col-lg-2 no-padding-left">
-				<a class="one-book-storage-thumb" href="<?php echo $bO['link'] ?>">
+				<a class="one-book-storage-thumb" href="<?php echo $bO['link'].'#in_storage' ?>">
 					<img class="book-thumb" src="<?php echo $bO['thumb'] ?>"/>
 				</a>
 				<a class="one-book-storage-title" href="<?php echo $bO['link'] ?>">
 					<?php echo $bO['title'] ?>
 				</a>
+				<div title="Số lượng: <?php echo $bO['num_in_storage'] ?>" class="one-book-in_storage"><?php echo $bO['num_in_storage'] ?></div>
 			</div>
 	<?php } ?>
 		</div>

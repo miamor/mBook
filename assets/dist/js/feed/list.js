@@ -64,7 +64,7 @@ function loadFeed (href, $feed, id, type) {
 		success: function (data) {
 			$feed.html(data);
 			$fContent = $feed.find('.feed-main-content');
-			
+
 			regex = /(^|\W)(#[a-z\d][\w-]*)/ig;
 			regexx = /(^|\W)(?!.*=\")(#[a-z\d][\w-]*)/ig;
 			//console.log($fContent.html());
@@ -74,10 +74,10 @@ function loadFeed (href, $feed, id, type) {
 
 			$form = $('.feed-load[data-type="'+type+'"][data-iid="'+id+'"] form.comment-form-feed');
 			formID = $form.attr('id');
-			
+
 			if (!$feed.find('.box-comments').find('div').length) $feed.find('.box-comments').hide();
 			else $feed.find('.box-comments').show();
-			
+
 			if ($('.nav-users .s-title').length) {
 				rate('#'+formID);
 				validator('#'+formID, href);
@@ -244,7 +244,7 @@ function load () {
 		type = $feed.attr('data-type');
 		iid = $feed.attr('data-iid');
 		href = '';
-		if ($this.text().indexOf(MAIN_URL) <= -1) 
+		if ($this.text().indexOf(MAIN_URL) <= -1)
 			href += MAIN_URL+'/';
 		href += $this.text();
 		if (href.indexOf('?') > -1) href += '&temp=feed';
@@ -331,7 +331,11 @@ function textAreaSceAdjust ($div) {
 
 $(document).ready(function () {
 	loadMorePage(0);
-	
+
+	$('a[href="#form_status"]').click(function () {
+		$('.feed-rv-book').hide();
+	})
+
 	// load review form
 	if (!$('#form_review .new-review').length) {
 			$.get(MAIN_URL+'/review?mode=new&temp=feed', function (data) {
@@ -341,6 +345,7 @@ $(document).ready(function () {
 				sce('.review-content');
 				validator('#form_review .new-review');
 				choosen('#form_review');
+				newReview();
 				$('#form_review :checkbox').not('[data-toggle="switch"], .onoffswitch-checkbox').checkbox();
 				$('#form_review :radio').radio();
 			})

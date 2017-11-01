@@ -545,10 +545,12 @@ function chat () {
 	})
 }
 
-function setRead (a) {
+function setRead (a, time) {
 	$.get(MAIN_URL+'/noti/'+a+'?do=setRead', function (data) {
 		console.log(data);
-		$('.notification-load .one-noti[data-id="'+a+'"]').attr('data-new', 0);
+		setTimeout(function () {
+			$('.notification-load .one-noti[data-id="'+a+'"]').attr('data-new', 0);
+		}, time);
 	})
 }
 
@@ -558,11 +560,16 @@ function getNoti () {
 		var new_num = $('.notification-load .one-noti[data-new="1"]').length;
 		if (new_num > 0) $('.noti-new-num').show().text(new_num);
 		else $('.noti-new-num').hide();
-		$('.notification-load .one-noti[data-new="1"] .noti-post-link').each(function () {
+		/*$('.notification-load .one-noti[data-new="1"] .noti-post-link').each(function () {
 			$(this).click(function () {
-				setRead($(this).closest('.one-noti').attr('data-id'));
+				setRead($(this).closest('.one-noti').attr('data-id'), 0);
 				location.href = $(this).attr('href');
 				return false;
+			})
+		})*/
+		$('.noti-new-num').parent('a').click(function () {
+			$('.notification-load .one-noti[data-new="1"] .noti-post-link').each(function () {
+				setRead($(this).closest('.one-noti').attr('data-id'), 300);
 			})
 		})
 	})

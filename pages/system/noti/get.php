@@ -44,7 +44,18 @@ foreach ($notiList as $oneNoti) {
 	else if ($type == 'new-review') {
 		$img = '<img style="margin-top:-6px" src="'.IMG.'/silk/coins.png"/>';
 		$icon = 'check';
-		echo 'Bạn được cộng thêm '.$img.'<b>'.$content['coins_added'].'</b> vì thêm một <a href="'.$config->rLink.'/'.$iid.'">review mới cho sách "'.$content['book_title'].'"</a> thành công.';
+		echo 'Bạn được cộng thêm '.$img.'<b>'.$content['coins_added'].'</b> vì thêm một <a class="noti-post-link" href="'.$config->rLink.'/'.$iid.'">review mới cho sách "'.$content['book_title'].'"</a> thành công.';
+	}
+	else if ($type == 'add-coin-returned') {
+		$img = '<img style="margin-top:-6px" src="'.IMG.'/silk/coins.png"/>';
+		$icon = 'check';
+		echo 'Cảm ơn bạn đã mượn và trả sách. Bạn vừa được cộng thêm '.$img.'<b>'.$content['coins_added'].'</b> vì tham gia chương trình chia sẻ sách của hệ thống.
+		<div class="note">Bạn có thể viết <a class="noti-post-link" href="'.$config->rLink.'?mode=new">review</a> cho cuốn sách vừa mượn để nhận thêm điểm. <a class="noti-post-link" href="'.$config->rLink.'?mode=new"><i class="fa fa-toggle-right"></i></a></div>';
+	}
+	else if ($type == 'new-chapter') {
+		$img = '<img style="margin-top:-6px" src="'.IMG.'/silk/coins.png"/>';
+		$icon = 'check';
+		echo 'Bạn được cộng thêm '.$img.'<b>'.$content['coins_added'].'</b> vì thêm một <a class="noti-post-link" href="'.$config->bLink.'/'.$content['book_id'].'/chapters/'.$content['chapter_id'].'">bài viết mới</a> thành công.';
 	}
 
 	echo '</div>'; // one-noti-content

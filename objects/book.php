@@ -83,7 +83,7 @@ class Book extends BookWrite {
 		if (!$order) $order = "title ASC, modified DESC, created DESC, id DESC";
 
 		$query = "SELECT
-					title,link,id,type,published,status,thumb,genres,created,modified,uid,author,in_storage,donated_uid
+					title,link,id,type,published,status,thumb,genres,created,modified,uid,author,in_storage
 				FROM
 					" . $this->table_name . "
 				{$cond}
@@ -294,6 +294,7 @@ class Book extends BookWrite {
 				$row['num_in_storage'] = $this->countDonationsBookNum();
 				$donatedList = $this->getDonationsBook();
 				foreach ($donatedList as $dno) {
+					$dno['user']['num'] = $dno['num'];
 					$row['donated_user'][] = $dno['user'];
 				}
 				$row['borrowList'] = $this->getBorrowList();

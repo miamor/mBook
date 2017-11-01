@@ -22,7 +22,7 @@
 			<label class="checkbox">
 				<input type="checkbox" value="write" checked name="post_type"/> Chuyên mục viết
 			</label>
-<!--			<label class="checkbox">
+			<!--<label class="checkbox">
 				<input type="checkbox" value="event" checked name="post_type"/> Sự kiện
 			</label>
 			<label class="checkbox">
@@ -61,6 +61,9 @@
 <div id="events">
 	<div class="clearfix"></div>
 </div>
+</div>
+<div class="col-lg-4 no-padding-right">
+	<div class="feed-rv-book"></div>
 </div>
 <!--<div class="col-lg-4 no-padding-right feed-advertise">
 	<div class="box">
