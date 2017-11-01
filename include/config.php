@@ -77,6 +77,13 @@ class Config {
 	public $JS;
 
 	public function __construct () {
+		$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+		$this->host = $url["host"];
+		$this->username = $url["user"];
+		$this->password = $url["pass"];
+		$this->db_name = substr($url["path"], 1);
+
 		$this->aLink = MAIN_URL.'/ask';
 		$this->gLink = MAIN_URL.'/gift';
 		$this->uLink = MAIN_URL.'/user';
@@ -160,11 +167,11 @@ class Config {
 			$thelink = $this->uLink;
 //			$row['username'] = $row['oauth_uid'];
 			$row['link'] = $thelink.'/'.$row['username'];
-			
+
 			// my pages
 			$row['myPage'] = $this->getPages();
 			$row['reviews'] = $this->getUserReviewsNum();
-			
+
 			// followers, following
 			$row['followers_txt'] = $row['followers'];
 			$row['followings_txt'] = $row['followings'];
@@ -213,7 +220,7 @@ class Config {
 //			$row['username'] = $row['oauth_uid'];
 			$row['link'] = $thelink.'/'.$row['username'];
 			return $row;
-		} 
+		}
 		return false;
 	}
 
@@ -255,7 +262,7 @@ class Config {
 		$stmt->bindParam(':coins', $new_coins);
 		$stmt->bindParam(':id', $u);
 		if ($stmt->execute()) {
-			return true; 
+			return true;
 		}
 		else return false;
 	}
@@ -297,13 +304,13 @@ class Config {
 		if (!$followerID) $followerID = $this->u;
 		$uFollowers = $this->getFollowers($u).' ['.$followerID.']';
 		$uFollowers = str_replace(' ', ',', trim($uFollowers));
-		
+
 		$query = "UPDATE members SET followers = :followers WHERE id = :id";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(':followers', $uFollowers);
 		$stmt->bindParam(':id', $u);
 		if ($stmt->execute()) {
-			return true; 
+			return true;
 		}
 		else return false;
 	}
@@ -318,7 +325,7 @@ class Config {
 			$stmt->bindParam(':id', $this->u);
 			if ($stmt->execute()) {
 				if ($this->addFollower($friendID)) {
-					return true; 
+					return true;
 				} else return false;
 			}
 			else return false;
@@ -398,7 +405,7 @@ class Config {
 			$this->rTotal = $totalReview;
 
 			$ratingsList = array_reverse($ratingsList);
-			
+
 			return $ratingsList;
 		}
 		return false;
@@ -416,7 +423,7 @@ class Config {
 		}
 		return false;
 	}
-*/	
+*/
 	function checkThisNoti ($valueAr, $u) {
 		foreach ($valueAr as $vK => $oneField) {
 			$condAr[] = "{$vK} = '{$oneField}'";
@@ -451,7 +458,7 @@ class Config {
 	if ($fromUID != $u) {
 		$condAr = array();
 		$remove = false;
-		
+
 		$content = $valueAr['content'];
 		if ($valueAr['type'] == 'like-post') {
 			unset($valueAr['content']);
@@ -473,13 +480,13 @@ class Config {
 				SET {$cond}";
 		$stmt = $this->conn->prepare($query);
 		if ($stmt->execute()) {
-			return true; 
+			return true;
 		}
 		else return false;
 	} // end if
 		return true;
 	}
-	
+
 	function getDetails ($u) {
 		if (!$u) $u = $this->u;
 		$query = "SELECT compile_details,iid,score FROM submissions WHERE uid = ?";
@@ -518,7 +525,7 @@ class Config {
 		return null;
 	}
 
-	
+
 	// show errors
 	function E ($errorCode) {
 		$config->errors[] = $errorCode;
@@ -561,8 +568,8 @@ class Config {
 		$this->emoTextareaDefault = implode(',', $emoTextareaDefault);
 		$this->emoTextareaMore = implode(',', $emoTextareaMore);
 	}
-*/	
-	
+*/
+
 	function addJS ($type, $link) {
 		if ($type == -1) {
 			$this->JS .= $link.'|';
@@ -592,7 +599,7 @@ function mb_ucfirst ($string, $encoding = "UTF-8") {
 }
 
 function checkInternet ($sCheckHost = 'www.google.com')  {
- $connected = @fsockopen($sCheckHost, 80); 
+ $connected = @fsockopen($sCheckHost, 80);
  return (bool) $connected;
 }
 
@@ -720,8 +727,8 @@ function mc_decrypt ($decrypt, $key) {
 	$decrypt = explode('|', $decrypt.'|');
 	$decoded = base64_decode($decrypt[0]);
 	$iv = base64_decode($decrypt[1]);
-	if(strlen($iv)!==mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC)){ 
-		return false; 
+	if(strlen($iv)!==mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC)){
+		return false;
 	}
 	$key = pack('H*', $key);
 	$decrypted = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $decoded, MCRYPT_MODE_CBC, $iv));
