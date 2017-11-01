@@ -5,11 +5,6 @@ error_reporting(E_ERROR | E_PARSE);
 $__pattern = '/mBook';
 
 define('MAIN_PATH', './');
-define('MAIN_PATH_EXEC', '/opt/lampp/htdocs'.$__pattern.'/');
-/*define('HOST_URL', '//localhost'.$__pattern);
-define('MAIN_URL', 'http:'.HOST_URL);
-define('HOST_URL', '//192.168.8.100'.$__pattern);
-*/
 define('HOST_URL', '//localhost'.$__pattern);
 define('MAIN_URL', 'http:'.HOST_URL);
 define('ASSETS', MAIN_URL.'/assets');
@@ -17,17 +12,11 @@ define('CSS', ASSETS.'/dist/css');
 define('JS', ASSETS.'/dist/js');
 define('IMG', ASSETS.'/dist/img');
 define('PLUGINS', ASSETS.'/plugins');
-//define('GG_API_KEY', 'AIzaSyA5xbqBF1tGx96z6-QLhGGmvqIQ5LUrt4s');
 define('GG_API_KEY', 'AIzaSyACkc-PYhlnPUWJaV2GlcCiEcuJujZsMdc');
 define('GG_CX_ID', '014962602028620469778:yf4br-mf6mk');
-/*define('EXEC_PATH_C_CPP', 'I:\Dev-Cpp\MinGW64\bin/');
-define('EXEC_PATH_JAVA', 'I:\Java\jdk1.8.0_91\bin/');
-define('EXEC_PATH_PYTHON', 'I:\Python2.7.12/');
-*/define('GOODREADS_KEY', 'Nw65U07B93O4X8l3SUTw');
+define('GOODREADS_KEY', 'Nw65U07B93O4X8l3SUTw');
 
 $__page = str_replace($__pattern.'/', '', $_SERVER['REQUEST_URI']);
-//define('__HOST', 'ubuntu');
-define('__HOST', 'window');
 
 define('COINS_SHARE_REVIEW', 2);
 define('COINS_SHARE_CHAPTER', 2);
@@ -77,7 +66,7 @@ class Config {
 	public $JS;
 
 	public function __construct () {
-		$url = parse_url(getenv("mysql://b75b09e4e368f8:bb0ff992@us-cdbr-iron-east-05.cleardb.net/heroku_8a2eeab299b2797?reconnect=true"));
+		$url = parse_url("mysql://b75b09e4e368f8:bb0ff992@us-cdbr-iron-east-05.cleardb.net/heroku_8a2eeab299b2797?reconnect=true");
 
 		$this->host = $url["host"];
 		$this->username = $url["user"];
