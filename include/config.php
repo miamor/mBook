@@ -68,7 +68,26 @@ class Config {
 	public function __construct () {
 		$url = parse_url("mysql://b75b09e4e368f8:bb0ff992@us-cdbr-iron-east-05.cleardb.net/heroku_8a2eeab299b2797?reconnect=true");
 
-		print_r($url);
+		$dbstr = substr($url, 8);
+		$dbstrarruser = explode(":", $dbstr);
+		$dbstrarrhost = explode("@", $dbstrarruser[1]);
+		$dbstrarrrecon = explode("?", $dbstrarrhost[1]);
+		$dbstrarrport = explode("/", $dbstrarrrecon[0]);
+
+		$this->password = $dbstrarrhost[0];
+		$this->host = $dbstrarrport[0];
+		$this->port = $dbstrarrport[0];
+		$this->username = $dbstrarruser[0];
+		$this->db_name = $dbstrarrport[1];
+		unset($dbstrarrrecon);
+		unset($dbstrarrport);
+		unset($dbstrarruser);
+		unset($dbstrarrhost);
+		unset($dbstr);
+
+		$dbanfang = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name;
+
+		//print_r($url);
 
 		$this->host = $url["host"];
 		$this->username = $url["user"];
