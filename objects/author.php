@@ -11,11 +11,11 @@ class Author extends Config {
 	public $link;
 	public $des;
 	public $born;
-	
+
 	public function __construct() {
 		parent::__construct();
 		// include simple dom to crawl author data from goodreads and wikipedia if not exists in mBook database
-		require_once(MAIN_PATH.'/include/html_dom.php');
+		//require_once(MAIN_PATH.'/include/html_dom.php');
 	}
 
 	// create product
@@ -56,15 +56,14 @@ class Author extends Config {
 				ORDER BY
 					{$order}";
 
-		
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
-		
+
 		$this->all_list = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$row['link'] = $this->auLink.'/'.$row['link'];
-			
+
 			$this->all_list[] = $row;
 		}
 
@@ -91,7 +90,7 @@ class Author extends Config {
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$this->id = $row['id'];
-		
+
 		if ($row['id']) {
 			$this->link = $row['link'] = $this->auLink.'/'.$row['link'];
 			$this->name = $row['name'];
@@ -99,7 +98,7 @@ class Author extends Config {
 
 		return $row;
 	}
-	
+
 	function works ($order = '') {
 		if (!$order) $order = "title ASC, id DESC";
 
@@ -112,16 +111,16 @@ class Author extends Config {
 				ORDER BY
 					{$order}";
 
-		
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->name);
 		$stmt->execute();
-		
+
 		$bList = array();
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$row['link'] = $this->bLink.'/'.$row['link'];
-			
+
 			$bList[] = $row;
 		}
 
@@ -157,7 +156,7 @@ class Author extends Config {
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query
-		if ($stmt->execute()) return true; 
+		if ($stmt->execute()) return true;
 		else return false;
 	}
 
@@ -165,7 +164,7 @@ class Author extends Config {
 	function delete() {
 
 		$query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
-		
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(1, $this->id);
 

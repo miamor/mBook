@@ -46,12 +46,12 @@
 #Options +FollowSymlinks
 #Options +Multiviews
 
-RewriteEngine On 
+RewriteEngine On
 RewriteBase /mBook/admin/
 
-RewriteCond %{REQUEST_FILENAME} !-d 
-RewriteCond %{REQUEST_FILENAME}\.php -f 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
 
-RewriteRule ^((?!(feed|f|review|gift|ask|request|write|event|lib|book|publisher|group|genres|storage|status|user|u))[^/].+)$ index.php?page=$1
+RewriteRule ^((?!(feed|review|gift|request|write|event|lib|book|print|publisher|group|genres|storage|status|user|u|login|logout|author|search|box|page|noti|start))[^/].+)$ index.php?page=$1
 
-RewriteRule ^((feed|f|review|gift|ask|request|write|event|lib|book|publisher|group|genres|storage|status|user|u).*) index.php?page=$1
+RewriteRule ^((feed|review|gift|request|write|event|lib|book|print|publisher|group|genres|storage|status|user|u|login|logout|author|search|box|page|noti|start).*) index.php?page=$1

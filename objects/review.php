@@ -31,7 +31,7 @@ class Review extends Config {
 		$query = "INSERT INTO
 					" . $this->table_name . "
 				SET
-					content = ?, rate = ?, iid = ?, uid = ?, to_fb = ?, thumb = ?, title = ?";
+					content = ?, rate = ?, iid = ?, uid = ?, to_fb = ?, thumb = ?, title = ?, `show` = ?";
 
 		$stmt = $this->conn->prepare($query);
 
@@ -44,9 +44,10 @@ class Review extends Config {
 		$stmt->bindParam(4, $this->u);
 		$stmt->bindParam(5, $this->toFB);
 		$stmt->bindParam(6, $thumbURL);
-		$stmt->bindParam(7, $this->bookTitle);
+		$stmt->bindParam(7, $this->title);
+		$stmt->bindParam(8, $this->status);
 
-//		echo $this->content.'~'.$this->iid.'~'.$this->rate.'~'.$this->u;
+		//echo $this->content.'~'.$this->iid.'~'.$this->rate.'~'.$this->u;
 		if ($stmt->execute()) {
 			// read id of new post
 			$newPost = $this->sReadOne();
@@ -105,6 +106,105 @@ class Review extends Config {
 		else return false;
 	}
 
+
+
+	function getAll ($uidAr = null, $bidAr = null, $avai = 1, $from_record_num = 0, $records_per_page = 24) {
+		$lim = '';
+		if ($records_per_page > 0)
+			$lim = "LIMIT {$from_record_num}, {$records_per_page}";
+
+		$cond = '';
+		$con = array();
+
+		$uidAr = array_values($uidAr);
+		if (count($uidAr) > 0) {
+			$conUAr = array();
+			foreach ($uidAr as $aO) {
+				$conUAr[] = "`uid` = '{$aO}' ";
+			}
+			$con[] = '('.implode(' OR ', $conUAr).')';
+		}
+
+		if ($avai == 0) {
+			$con[] = "iid = '' OR iid = null";
+		} else if ($avai == 1) {
+			$bidAr = array_values($bidAr);
+			if (count($bidAr) > 0) {
+				$conBAr = array();
+				foreach ($bidAr as $bO) {
+					$conBAr[] = "iid = '{$bO}' ";
+				}
+				$con[] = '('.implode(' OR ', $conBAr).')';
+			}
+		}
+
+		if (count($con) > 0) $cond = 'WHERE '.implode(' AND ', $con);
+
+		$query = "SELECT
+					*
+				FROM
+					".$this->table_name."
+				{$cond}
+				ORDER BY
+					created DESC, id DESC
+				{$lim}";
+
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+
+		$this->all_list = array();
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			//$row['author'] = $this->getUserInfo($row['uid']);
+			$row = $this->make($row);
+			$row['book'] = $this->getBookInfo($row['iid']);
+			$this->all_list[] = $row;
+		}
+		return $this->all_list;
+	}
+
+	function countAll ($uidAr = null, $bidAr = null, $avai = 1) {
+		$cond = '';
+		$con = array();
+
+		$uidAr = array_values($uidAr);
+		if (count($uidAr) > 0) {
+			$conUAr = array();
+			foreach ($uidAr as $aO) {
+				$conUAr[] = "`uid` = '{$aO}' ";
+			}
+			$con[] = '('.implode(' OR ', $conUAr).')';
+		}
+
+		if ($avai == 0) {
+			$con[] = "iid = '' OR iid = null";
+		} else if ($avai == 1) {
+			$bidAr = array_values($bidAr);
+			if (count($bidAr) > 0) {
+				$conBAr = array();
+				foreach ($bidAr as $bO) {
+					$conBAr[] = "iid = '{$bO}' ";
+				}
+				$con[] = '('.implode(' OR ', $conBAr).')';
+			}
+		}
+
+		if (count($con) > 0) $cond = 'WHERE '.implode(' AND ', $con);
+
+		$query = "SELECT
+					id
+				FROM
+					".$this->table_name."
+				{$cond}";
+
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+
+		return $stmt->rowCount();
+	}
+
+
+
 	function sReadOne () {
 		$query = "SELECT id FROM
 					" . $this->table_name . "
@@ -148,7 +248,7 @@ class Review extends Config {
 		$stmt->bindParam(3, $this->id);
 		$stmt->bindParam(4, $this->u);
 
-//		echo $this->table_name.'_ratings ~ '.$this->rContent.' ~ '.$this->rate.' ~ '.$this->id.' ~ '.$this->u;
+		//echo $this->table_name.'_ratings ~ '.$this->rContent.' ~ '.$this->rate.' ~ '.$this->id.' ~ '.$this->u;
 
 		if ($stmt->execute()) {
 				// add coin for user who writes this
@@ -199,7 +299,6 @@ class Review extends Config {
 		if (!$iid && $this->iid) $iid = $this->iid;
 		if ($iid) $con[] = "iid = {$iid}";
 		if ($u) $con[] = "uid = {$u}";
-		$con[] = "`show` = 1";
 		$cond = implode(' AND ', $con);
 
 		$query = "SELECT
@@ -230,7 +329,7 @@ class Review extends Config {
 				FROM
 					" . $this->table_name . "
 				WHERE
-					id = ? AND `show` = 1
+					id = ?
 				LIMIT 0,1";
 
 		$stmt = $this->conn->prepare($query);
@@ -241,9 +340,9 @@ class Review extends Config {
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$this->id = $row['id'];
 		if ($row['id']) {
-/*			$book = new Book();
-			$book->id = $row['iid'];
-*/			$row['book'] = $this->getBookInfo($row['iid']);
+			/*$book = new Book();
+			$book->id = $row['iid'];*/
+			if ($row['iid']) $row['book'] = $this->getBookInfo($row['iid']);
 			$row['link'] = $this->link = $this->rLink.'/'.$row['id'];
 			$this->uid = $row['uid'];
 			$this->bookTitle = $row['title'];
@@ -251,25 +350,24 @@ class Review extends Config {
 			$this->toFB_html = ($row['fb_post_id']) ? '<a href="'.$toFB_link.'"><i class="fa fa-facebook-square"></i> '.$row['fb_post_id'].'</a>' : null;
 
 			$text = $row['content'];
-//			$row['content'] = content($text);
+			//$row['content'] = content($text);
 
-//			$breaks = array("<br />","<br>","<br/>");
-//			$text = str_ireplace($breaks, "\r\n", $text);
-//			$row['content_feed'] = (strlen($text) > 1500) ? content(substr(htmlspecialchars(strip_tags($text)), 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
+			//$breaks = array("<br />","<br>","<br/>");
+			//$text = str_ireplace($breaks, "\r\n", $text);
+			//$row['content_feed'] = (strlen($text) > 1500) ? content(substr(htmlspecialchars(strip_tags($text)), 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
 			$row['content_feed'] = (strlen($text) > 1500) ? content(substr(strip_tags($text,'<br>'), 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
 			$row = $this->make($row);
 
 			// share list
 			$row['shareNum'] = $this->getShareNum();
-/*			$row['share'] = array();
+			/*$row['share'] = array();
 			if ($row['share']) {
 				$shareAr = explode(',', $row['share']);
 				foreach ($shareAr as $oS)
 					$uShare[] = $this->getUserInfo($oS);
 				$row['share'] = $uShare;
 				$row['shareNum'] = count($shareAr);
-			}
-*/
+			} */
 		}
 
 		return $row;
@@ -370,13 +468,12 @@ class Review extends Config {
 			else $row['author'] = array('name' => $row['author'], 'link' => $this->auLink.'/'.encodeURL($row['author']));
 
 			if ($row['in_storage']) {
-				/*$donated_users = explode('|', $row['donated_uid']);
+				$donated_users = explode('|', $row['donated_uid']);
 				$row['num_in_storage'] = 0;
 				foreach ($donated_users as $dno) {
 					$dno = explode('-', $dno);
 					$row['num_in_storage'] += $dno[1];
-				}*/
-				$row['num_in_storage'] = $this->countDonationsBookNum($row['id']);
+				}
 			}
 
 			// genres
@@ -409,27 +506,6 @@ class Review extends Config {
 		}
 
 		return $row;
-	}
-
-	function countDonationsBookNum ($bid = null) {
-		if ($bid) {
-		$query = "SELECT
-					id,num
-				FROM
-					donations
-				WHERE
-					bid = ?";
-
-		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(1, $bid);
-		$stmt->execute();
-
-		$num = 0;
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$num += $row['num'];
-		}
-		} else $num = 0;
-		return $num;
 	}
 
 	function getBookList () {
@@ -542,7 +618,9 @@ class Review extends Config {
 				SET
 					content = :content,
 					rate = :rate,
+					title = :title,
 					iid = :iid,
+					`show` = :show,
 					modified  = :modified
 				WHERE
 					id = :id";
@@ -552,8 +630,10 @@ class Review extends Config {
 		// bind parameters
 		$stmt->bindParam(':content', $this->content);
 		$stmt->bindParam(':rate', $this->rate);
+		$stmt->bindParam(':title', $this->title);
 		$stmt->bindParam(':iid', $this->iid);
 		$stmt->bindParam(':modified', $this->timestamp);
+		$stmt->bindParam(':show', $this->status);
 		$stmt->bindParam(':id', $this->id);
 
 		$this->link = $this->rLink.'/'.$this->id;

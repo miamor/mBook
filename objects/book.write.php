@@ -48,17 +48,6 @@ class BookWrite extends Config {
 		return $row;
 	}
 
-	public function showPages ($pStart, $records, $pages, $activeSt) {
-		$pageHTML = '';
-		for ($p = $pStart; $p <= $pages; $p++) {
-			$st = $p*$records;
-			$cls = 'paginate_button';
-			if ($activeSt == $st) $cls = 'paginate_button active';
-			$pageHTML .= '<li class="'.$cls.'"><a href="?start='.$st.'&records='.$records.'">'.($p+1).'</a></li>';
-		}
-		return $pageHTML;
-	}
-
 	protected function getGenre ($g = 0) {
 		$g = intval(preg_replace('/[^0-9]+/', '', $g), 10);
 		$query = "SELECT
@@ -141,7 +130,7 @@ class BookWrite extends Config {
 			$row['link'] = $this->rLink.'/'.$row['id'];
 			$row['author'] = $this->getUserInfo($row['uid']);
 
-//			$row['content'] = content(substr($row['content'], 0, 1200)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>';
+			//$row['content'] = content(substr($row['content'], 0, 1200)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>';
 			$cont = htmlspecialchars(strip_tags($row['content']));
 			$row['short_content'] = (strlen($cont) > 280) ? content(substr($cont, 0, 280)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
 			$row['content_feed'] = (strlen($cont) > 1500) ? content(substr($cont, 0, 1500)).'... <a href="'.$row['link'].'" id="'.$row['id'].'" class="book-rv-read gensmall">Xem đầy đủ</a>' : $row['content'];
@@ -231,31 +220,38 @@ class BookWrite extends Config {
 	}
 
 	public function update() {
-
 		$query = "UPDATE
 					" . $this->table_name . "
 				SET
-					name = :name,
-					price = :price,
-					description = :description,
-					category_id  = :category_id
+					title = :title,
+					genres = :genres,
+					thumb = :thumb,
+					author = :author,
+					des = :des,
+					`show` = :show,
+					download = :download
 				WHERE
 					id = :id";
 
 		$stmt = $this->conn->prepare($query);
 
 		// posted values
-		$this->name=htmlspecialchars(strip_tags($this->name));
-		$this->price=htmlspecialchars(strip_tags($this->price));
-		$this->description=htmlspecialchars(strip_tags($this->description));
-		$this->category_id=htmlspecialchars(strip_tags($this->category_id));
+		$this->title=htmlspecialchars(strip_tags($this->title));
+		$this->genres=htmlspecialchars(strip_tags($this->genres));
+		$this->thumb=htmlspecialchars(strip_tags($this->thumb));
+		$this->author=htmlspecialchars(strip_tags($this->author));
+		$this->download=htmlspecialchars(strip_tags($this->download));
+		$this->des=content($this->des);
 		$this->id=htmlspecialchars(strip_tags($this->id));
 
 		// bind parameters
-		$stmt->bindParam(':name', $this->name);
-		$stmt->bindParam(':price', $this->price);
-		$stmt->bindParam(':description', $this->description);
-		$stmt->bindParam(':category_id', $this->category_id);
+		$stmt->bindParam(':title', $this->title);
+		$stmt->bindParam(':genres', $this->genres);
+		$stmt->bindParam(':thumb', $this->thumb);
+		$stmt->bindParam(':author', $this->author);
+		$stmt->bindParam(':download', $this->download);
+		$stmt->bindParam(':des', $this->des);
+		$stmt->bindParam(':show', $this->status);
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query
@@ -264,7 +260,6 @@ class BookWrite extends Config {
 	}
 
 	public function delete() {
-
 		$query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
 
 		$stmt = $this->conn->prepare($query);

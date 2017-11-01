@@ -2,16 +2,10 @@
 session_start();
 error_reporting(E_ERROR | E_PARSE);
 
-$__pattern = '';
+$__pattern = '/mBook';
 
 define('MAIN_PATH', './');
-define('HOST_URL', '//wicked-hollow-14729.herokuapp.com'.$__pattern);
-define('MAIN_URL', 'https:'.HOST_URL);
-define('ASSETS', MAIN_URL.'/assets');
-define('CSS', ASSETS.'/dist/css');
-define('JS', ASSETS.'/dist/js');
-define('IMG', ASSETS.'/dist/img');
-define('PLUGINS', ASSETS.'/plugins');
+define('HOST_URL', 'http://localhost'.$__pattern);
 define('GG_API_KEY', 'AIzaSyACkc-PYhlnPUWJaV2GlcCiEcuJujZsMdc');
 define('GG_CX_ID', '014962602028620469778:yf4br-mf6mk');
 define('GOODREADS_KEY', 'Nw65U07B93O4X8l3SUTw');
@@ -65,34 +59,31 @@ class Config {
 	public $request;
 	public $JS;
 
-	public function __construct () {
-		$url = parse_url("mysql://b8e84b62f93e7b:0e926ba0@us-cdbr-iron-east-05.cleardb.net/heroku_59626d3ca8b1007?reconnect=true");
-
-		$dbstr = substr($url, 8);
-		$dbstrarruser = explode(":", $dbstr);
-		$dbstrarrhost = explode("@", $dbstrarruser[1]);
-		$dbstrarrrecon = explode("?", $dbstrarrhost[1]);
-		$dbstrarrport = explode("/", $dbstrarrrecon[0]);
-
-		$this->password = $dbstrarrhost[0];
-		$this->host = $dbstrarrport[0];
-		$this->port = $dbstrarrport[0];
-		$this->username = $dbstrarruser[0];
-		$this->db_name = $dbstrarrport[1];
-		unset($dbstrarrrecon);
-		unset($dbstrarrport);
-		unset($dbstrarruser);
-		unset($dbstrarrhost);
-		unset($dbstr);
+	public function __construct ($isAdmin = false) {
+		/*$url = parse_url("mysql://b8e84b62f93e7b:0e926ba0@us-cdbr-iron-east-05.cleardb.net/heroku_59626d3ca8b1007?reconnect=true");
 
 		//print_r($url);
 
 		$this->host = $url["host"];
 		$this->username = $url["user"];
 		$this->password = $url["pass"];
-		$this->db_name = substr($url["path"], 1);
+		$this->db_name = substr($url["path"], 1);*/
 
 		//echo $this->host.'~'.$this->username.'~'.$this->pass.'~'.$this->db_name;
+
+		if (!defined('MAIN_URL')) {
+			if ($isAdmin) {
+				define('MAIN_URL', HOST_URL.'/admin');
+			} else {
+				define('MAIN_URL', HOST_URL);
+			}
+		}
+
+		if (!defined('ASSETS')) define('ASSETS', MAIN_URL.'/assets');
+		if (!defined('CSS')) define('CSS', ASSETS.'/dist/css');
+		if (!defined('JS')) define('JS', ASSETS.'/dist/js');
+		if (!defined('IMG')) define('IMG', ASSETS.'/dist/img');
+		if (!defined('PLUGINS')) define('PLUGINS', ASSETS.'/plugins');
 
 		$this->aLink = MAIN_URL.'/ask';
 		$this->gLink = MAIN_URL.'/gift';

@@ -2,6 +2,7 @@
 // config file
 include_once 'include/config.php';
 $config = new Config();
+
 //$userAgent = new userAgent();
 
 /* already run this in config

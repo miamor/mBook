@@ -9,7 +9,7 @@
 		</div>
 		<div class="clearfix"></div>
 	</div>
-<?php if ($config->me['is_mod'] === 1) { ?>
+<?php //if ($config->me['is_mod'] === 1) { ?>
 	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Tác giả *</div>
 		<div class="col-lg-5 no-padding">
@@ -25,7 +25,7 @@
 		</div>
 		<div class="clearfix"></div>
 	</div>
-<?php } ?>
+<?php //} ?>
 
 	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Thể loại *</div>
