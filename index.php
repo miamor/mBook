@@ -16,8 +16,8 @@ if ($config->u) {
 if (check($__page, '?') > 0) $__page = $__page.'&';
 else $__page = $__page;
 
-
 $__pageAr = array_values(array_filter(explode('/', explode('?', rtrim($__page))[0])));
+
 //$__pageAr = array_filter(explode('/', explode('&', rtrim($__page))[0]));
 //print_r($__pageAr);
 if ($__pageAr) {
@@ -42,20 +42,6 @@ if ($do) header('Content-Type: text/plain; charset=utf-8');
 else header('Content-Type: text/html; charset=utf-8');
 
 if (!isset($page) || !$page) $page = 'feed';
-
-//$page_ = $page;
-
-if ($page == 'p') $page = 'problems';
-if ($page == 'w') $page = 'web';
-if ($page == 'h') $page = 'hack';
-if ($page == 'j') $page = 'java';
-
-if ($page == 'b') $page = 'forum';  	// blog or forum
-if ($page == 'f') $page = 'files';
-if ($page == 't') $page = 'test';
-if ($page == 'u') $page = 'user';
-if ($page == 'c') $page = 'contest';
-
 
 //$config->emoTextareaDropdown();
 

@@ -18,8 +18,6 @@ define('GOODREADS_KEY', 'Nw65U07B93O4X8l3SUTw');
 
 $__page = str_replace($__pattern.'/', '', $_SERVER['REQUEST_URI']);
 
-echo $__page.'~';
-
 define('COINS_SHARE_REVIEW', 2);
 define('COINS_SHARE_CHAPTER', 2);
 define('COINS_SHARE_STATUS', 2);
@@ -136,8 +134,8 @@ class Config {
 		try {
 			//$this->conn = new PDO("mysql: host=" . $this->host . ";port=".$this->port.";dbname=" . $this->db_name, $this->username, $this->password);
 
-			$this->conn = $dbanfang = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name;
-			new PDO($dbanfang, $this->username, $this->password);
+			$dbanfang = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name;
+			$this->conn =new PDO($dbanfang, $this->username, $this->password);
 
 			$this->conn->exec("set names utf8");
 		} catch (PDOException $exception) {
