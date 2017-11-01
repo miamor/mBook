@@ -84,6 +84,8 @@ class Config {
 		$this->password = $url["pass"];
 		$this->db_name = substr($url["path"], 1);
 
+		echo $this->host.'~~~~~~~~~~~~~';
+
 		$this->aLink = MAIN_URL.'/ask';
 		$this->gLink = MAIN_URL.'/gift';
 		$this->uLink = MAIN_URL.'/user';
