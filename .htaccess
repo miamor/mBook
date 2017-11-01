@@ -46,11 +46,11 @@
 #Options +FollowSymlinks
 #Options +Multiviews
 
-RewriteEngine On 
-RewriteBase /mBook/
+RewriteEngine On
+RewriteBase /
 
-RewriteCond %{REQUEST_FILENAME} !-d 
-RewriteCond %{REQUEST_FILENAME}\.php -f 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
 
 RewriteRule ^((?!(feed|review|gift|request|write|event|lib|book|print|publisher|group|genres|storage|status|user|u|login|logout|author|search|box|page|noti|start))[^/].+)$ index.php?page=$1
 

@@ -2,7 +2,7 @@
 session_start();
 error_reporting(E_ERROR | E_PARSE);
 
-$__pattern = '/mBook';
+$__pattern = '';
 
 define('MAIN_PATH', './');
 define('HOST_URL', '//localhost'.$__pattern);
@@ -85,14 +85,14 @@ class Config {
 		unset($dbstrarrhost);
 		unset($dbstr);
 
-		print_r($url);
+		//print_r($url);
 
 		$this->host = $url["host"];
 		$this->username = $url["user"];
 		$this->password = $url["pass"];
 		$this->db_name = substr($url["path"], 1);
 
-		echo $this->host.'~'.$this->username.'~'.$this->pass.'~'.$this->db_name;
+		//echo $this->host.'~'.$this->username.'~'.$this->pass.'~'.$this->db_name;
 
 		$this->aLink = MAIN_URL.'/ask';
 		$this->gLink = MAIN_URL.'/gift';
