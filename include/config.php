@@ -5,8 +5,8 @@ error_reporting(E_ERROR | E_PARSE);
 $__pattern = '';
 
 define('MAIN_PATH', './');
-define('HOST_URL', '//localhost'.$__pattern);
-define('MAIN_URL', 'http:'.HOST_URL);
+define('HOST_URL', '//wicked-hollow-14729.herokuapp.com'.$__pattern);
+define('MAIN_URL', 'https:'.HOST_URL);
 define('ASSETS', MAIN_URL.'/assets');
 define('CSS', ASSETS.'/dist/css');
 define('JS', ASSETS.'/dist/js');
@@ -17,6 +17,8 @@ define('GG_CX_ID', '014962602028620469778:yf4br-mf6mk');
 define('GOODREADS_KEY', 'Nw65U07B93O4X8l3SUTw');
 
 $__page = str_replace($__pattern.'/', '', $_SERVER['REQUEST_URI']);
+
+echo $__page.'~';
 
 define('COINS_SHARE_REVIEW', 2);
 define('COINS_SHARE_CHAPTER', 2);

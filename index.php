@@ -61,7 +61,7 @@ if ($page == 'c') $page = 'contest';
 
 if (!file_exists('pages/'.$page.'.php')) $page = 'error';
 
-$page_title = 'mCode';
+$page_title = 'Share my reading!';
 
 if ($page) {
 //	if (!$do && !$v && !$temp) include 'pages/views/_temp/header.php';
