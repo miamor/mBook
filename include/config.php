@@ -68,12 +68,14 @@ class Config {
 	public function __construct () {
 		$url = parse_url("mysql://b75b09e4e368f8:bb0ff992@us-cdbr-iron-east-05.cleardb.net/heroku_8a2eeab299b2797?reconnect=true");
 
+		print_r($url);
+
 		$this->host = $url["host"];
 		$this->username = $url["user"];
 		$this->password = $url["pass"];
 		$this->db_name = substr($url["path"], 1);
 
-		echo $this->host.'~~~~~~~~~~~~~';
+		echo $this->host.'~'.$this->username.'~'.$this->pass.'~'.$this->db_name;
 
 		$this->aLink = MAIN_URL.'/ask';
 		$this->gLink = MAIN_URL.'/gift';
