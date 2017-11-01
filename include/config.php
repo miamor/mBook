@@ -77,7 +77,7 @@ class Config {
 	public $JS;
 
 	public function __construct () {
-		$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+		$url = parse_url(getenv("mysql://b75b09e4e368f8:bb0ff992@us-cdbr-iron-east-05.cleardb.net/heroku_8a2eeab299b2797?reconnect=true"));
 
 		$this->host = $url["host"];
 		$this->username = $url["user"];
