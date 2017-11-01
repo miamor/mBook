@@ -57,7 +57,7 @@ class Config {
 	private $host = "localhost";
 	private $db_name = "mBook";
 	private $username = "root";
-	private $password = "";
+	private $password = "abc123";
 	private $port = "3306";
 	protected $conn;
 	public $u;
@@ -66,7 +66,7 @@ class Config {
 	public $JS;
 
 	public function __construct () {
-		$url = parse_url("mysql://b75b09e4e368f8:bb0ff992@us-cdbr-iron-east-05.cleardb.net/heroku_8a2eeab299b2797?reconnect=true");
+		$url = parse_url("mysql://b8e84b62f93e7b:0e926ba0@us-cdbr-iron-east-05.cleardb.net/heroku_59626d3ca8b1007?reconnect=true");
 
 		$dbstr = substr($url, 8);
 		$dbstrarruser = explode(":", $dbstr);
@@ -85,9 +85,7 @@ class Config {
 		unset($dbstrarrhost);
 		unset($dbstr);
 
-		$dbanfang = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name;
-
-		//print_r($url);
+		print_r($url);
 
 		$this->host = $url["host"];
 		$this->username = $url["user"];
@@ -134,7 +132,11 @@ class Config {
 		$this->conn = null;
 
 		try {
-			$this->conn = new PDO("mysql: host=" . $this->host . ";port=".$this->port.";dbname=" . $this->db_name, $this->username, $this->password);
+			//$this->conn = new PDO("mysql: host=" . $this->host . ";port=".$this->port.";dbname=" . $this->db_name, $this->username, $this->password);
+
+			$this->conn = $dbanfang = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name;
+			new PDO($dbanfang, $this->username, $this->password);
+
 			$this->conn->exec("set names utf8");
 		} catch (PDOException $exception) {
 			echo "Connection error: " . $exception->getMessage();
