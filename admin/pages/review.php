@@ -17,13 +17,27 @@ if ($n) {
 	}
 }
 
-if ($do) include 'pages/system/'.$page.'/'.$do.'.php';
-else if ($mode) {
-	include 'views/'.$page.'/'.$mode.'.php';
+if ($type == 'facebook' && $_id) {
+	$review->crawlFromFb($_id);
+	//print_r($review->fb_post);
 }
-else if ($n) {
-	if ($review->id) {
-		$mode = 'edit';
+
+if ($type) {
+	if (!$mode && $type == 'facebook') $mode = 'crawl';
+	if ($do) include 'pages/system/'.$page.'/'.$type.'.'.$mode.'.'.$do.'.php';
+	else {
+		include 'views/'.$page.'/'.$type.'.'.$mode.'.php';
+	}
+}
+else {
+	if ($do) include 'pages/system/'.$page.'/'.$do.'.php';
+	else if ($mode) {
 		include 'views/'.$page.'/'.$mode.'.php';
-	} else include 'views/error.php';
-} else include 'views/'.$page.'/list.php';
+	}
+	else if ($n) {
+		if ($review->id) {
+			$mode = 'edit';
+			include 'views/'.$page.'/'.$mode.'.php';
+		} else include 'views/error.php';
+	} else include 'views/'.$page.'/list.php';
+}

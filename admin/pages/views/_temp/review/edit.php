@@ -67,6 +67,19 @@
 		<div class="clearfix"></div>
 	</div>
 
+	<div class="form-group">
+		<div class="col-lg-3 no-padding-left">Highlight</div>
+		<div class="col-lg-9 no-padding">
+			<label class="radio col-lg-3">
+				<input type="radio" value="1" <?php if ($highlight == 1) echo 'checked' ?> name="highlight"/> Yes
+			</label>
+			<label class="radio col-lg-3">
+				<input type="radio" value="0" <?php if ($highlight == 0) echo 'checked' ?> name="highlight"/> No
+			</label>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
 	<div class="add-form-submit center">
 		<input type="reset" value="Reset" class="btn btn-default">
 		<input type="submit" value="Submit" class="btn btn-red">

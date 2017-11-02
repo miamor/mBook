@@ -2,6 +2,8 @@
 $review->content = $content = isset($_POST['content']) ? $_POST['content'] : null;
 $review->iid = $iid = isset($_POST['bid']) ? $_POST['bid'] : null;
 $review->rate = $rate = isset($_POST['rate']) ? $_POST['rate'] : 0;
+$review->status = $show;
+$review->highlight = $highlight;
 
 if ($content && $rate && $iid) {
 	$update = $review->update();

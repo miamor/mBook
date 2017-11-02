@@ -1,5 +1,5 @@
 <?php
-$page_title = "Tạo eBook mới";
+$page_title = "Thêm sách mới";
 
 include 'objects/genre.php';
 $genre = new Genre();
@@ -14,4 +14,3 @@ $auList = $au->all_list;
 if (!$do && !$v && !$temp) include 'pages/views/_temp/header.php';
 
 include 'pages/views/_temp/book/mode.'.$mode.'.php';
-

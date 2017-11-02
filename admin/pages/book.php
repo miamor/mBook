@@ -70,7 +70,7 @@ if ($type) {
 	} else if ($n) {
 		$mode = 'edit';
 		if ($book->id) {
-			include 'views/write/'.$mode.'.php';
+			include 'views/book/'.$mode.'.php';
 		} else {
 			include 'views/error.php';
 		}

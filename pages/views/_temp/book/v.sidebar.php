@@ -105,25 +105,34 @@ if ($in_storage) { ?>
 <div class="book-donated-info console success" id="in_storage">
 	<div class="csl-main">Có sẵn trong kho sách. <br/>(Số lượng: <b class="num_in_storage"><?php echo $num_in_storage ?></b>)</div>
 </div>
-<div class="book-donated-users">
-	<h4 class="with-border">Đóng góp vào kho sách bởi </h4>
-	<?php foreach ($donated_user as $dno) { ?>
-	<div class="book-donated-user-name"><a href="<?php echo $dno['link'] ?>"><?php echo $dno['name'] ?></a> (<?php echo $dno['num'] ?>)</div>
-	<?php } ?>
+<div class="box book-donated-users">
+	<h4 class="box-header with-border">Đóng góp vào kho sách bởi </h4>
+	<div class="box-body">
+		<?php foreach ($donated_user as $dno) { ?>
+		<div class="book-donated-one">
+			<a href="<?php echo $dno['link'] ?>">
+				<img class="book-donated-one-avt" src="<?php echo $oneBorrow['user']['avatar'] ?>"/> <?php echo $dno['name'] ?>
+			</a>
+			(<?php echo $dno['num'] ?>)
+		</div>
+		<?php } ?>
+	</div>
 </div>
-<div class="book-borrow">
-	<h4 class="book-borrow-header with-border">Đăng ký mượn sách</h3>
+<div class="box book-borrow">
+	<h4 class="box-header book-borrow-header with-border">Đăng ký mượn sách</h4>
+	<div class="box-body no-padding-top no-padding-left no-padding-right">
 	<ul class="book-borrow-list">
 	<?php foreach ($borrowList as $oneBorrow) { ?>
 		<li class="book-borrow-one <?php if ($oneBorrow['user']['id'] == $config->u) echo 'isyou' ?>" data-u="<?php echo $oneBorrow['user']['username'] ?>">
 			<a href="<?php echo $oneBorrow['user']['link'] ?>"><img class="book-borrow-one-avt" src="<?php echo $oneBorrow['user']['avatar'] ?>"/> <?php echo $oneBorrow['user']['name'] ?></a>
 			<span class="borrow-status" data-stt="<?php echo $oneBorrow['stt'] ?>" title="<?php echo $oneBorrow['sttTxt'] ?>"></span> <i class="borrow-status-text hidden">(<?php echo $oneBorrow['sttTxt'] ?>)</i>
-			<?php if ($oneBorrow['reviewID']) echo '<a href="'.$oneBorrow['reviewLink'].'" title="Xem đánh giá của '.$oneBorrow['user']['name'].'">Review</a>' ?>
+			<?php if ($oneBorrow['reviewID']) echo '<a href="'.$oneBorrow['reviewLink'].'" class="book-borrow-review-link" title="Xem đánh giá của '.$oneBorrow['user']['name'].'">Review</a>' ?>
 		</li>
 	<?php } ?>
 	</ul>
 	<?php if ($book->checkRegister() > 0) echo '<a href="#" class="btn btn-block btn-danger borrow-register">Huỷ đăng kí đặt sách</a>';
 	 else echo '<a href="#" class="btn btn-block btn-success borrow-register">Đăng kí đặt sách</a>' ?>
+ 	</div>
 </div>
 <?php }
  ?>

@@ -7,6 +7,8 @@ $review->bookTitle = isset($_POST['book']) ? $_POST['book'] : null;
 $review->iid = $iid = isset($_POST['bid']) ? $_POST['bid'] : 0;
 $review->rate = $rate = isset($_POST['rate']) ? $_POST['rate'] : 0;
 $review->uid = $uid = isset($_POST['uid']) ? $_POST['uid'] : $config->u;
+$review->status = 1;
+
 //print_r($thumb);
 if ( (!$toFB || ($toFB && $thumb) ) && $content && $rate) {
 	$theRv = $review->sReadOne();

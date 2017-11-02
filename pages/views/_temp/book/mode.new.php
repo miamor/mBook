@@ -1,6 +1,6 @@
 <div class="col-lg-2"></div>
 <form class="bootstrap-validator-form new-write col-lg-8 no-padding" action="?do=new">
-	<h3 class="no-margin-top">Tạo eBook mới</h3>
+	<h3 class="no-margin-top">Thêm sách mới</h3>
 
 	<div class="form-group">
 		<div class="col-lg-3 control-label no-padding-left">Tiêu đề *</div>
@@ -14,7 +14,7 @@
 		<div class="col-lg-3 control-label no-padding-left">Tác giả *</div>
 		<div class="col-lg-5 no-padding">
 			<select name="author" class="form-control chosen-select">
-				<option value="-1">Select an author</option>
+				<option value="0">Select an author</option>
 		<?php foreach ($auList as $aO) {
 			echo '<option value="'.$aO['name'].'">'.$aO['name'].'</option>';
 		} ?>
@@ -53,9 +53,9 @@
 		<div class="clearfix"></div>
 	</div>
 	<div class="form-group">
-		<div class="col-lg-3 control-label no-padding-left">Link download ebook *</div>
+		<div class="col-lg-3 control-label no-padding-left">Link download ebook </div>
 		<div class="col-lg-9 no-padding">
-			<textarea class="form-control non-sce" name="link"></textarea>
+			<textarea class="form-control non-sce" name="download"></textarea>
 			<div class="small">(*) Nếu có nhiều hơn 1 link, đặt mỗi link một dòng.</div>
 		</div>
 		<div class="clearfix"></div>

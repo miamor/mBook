@@ -4,6 +4,7 @@ $review->title = $bookTitle = isset($_POST['book']) ? $_POST['book'] : null;
 $review->iid = $iid = isset($_POST['bid']) ? $_POST['bid'] : null;
 $review->rate = $rate = isset($_POST['rate']) ? $_POST['rate'] : 0;
 $review->status = $status = isset($_POST['status']) ? $_POST['status'] : 0;
+$review->highlight = $highlight = isset($_POST['highlight']) ? $_POST['highlight'] : 0;
 
 if ($content && $rate && ($iid || $bookTitle)) {
 	$update = $review->update();

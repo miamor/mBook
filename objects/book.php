@@ -11,7 +11,7 @@ class Book extends BookWrite {
 			$query = "INSERT INTO
 					" . $this->table_name . "
 				SET
-					title = ?, link = ?, des = ?, genres = ?, author = ?, published = ?, download = ?, `show` = ?, type = ?, added_uid = ?";
+					title = ?, link = ?, des = ?, genres = ?, author = ?, published = ?, download = ?, `show` = ?, type = ?, added_uid = ?, thumb = ?";
 
 		$stmt = $this->conn->prepare($query);
 
@@ -33,6 +33,7 @@ class Book extends BookWrite {
 		$stmt->bindParam(8, $this->status);
 		$stmt->bindParam(9, $this->type);
 		$stmt->bindParam(10, $this->u);
+		$stmt->bindParam(11, $this->thumb);
 
 		if ($stmt->execute()) {
 			$this->link = $this->bLink.'/'.$this->link;
@@ -241,6 +242,7 @@ class Book extends BookWrite {
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$row['user'] = $this->getUserInfo($row['uid']);
+			$row['user']['num'] = $row['num'];
 			$row['book'] = $this->sReadOneByID();
 			$all_list[] = $row;
 		}
@@ -262,7 +264,8 @@ class Book extends BookWrite {
 		return $stmt->rowCount();
 	}
 
-	function countDonationsBookNum () {
+	function countDonationsBookNum ($bid = null) {
+		if (!$bid) $bid = $this->id;
 		$query = "SELECT
 					id,num
 				FROM
@@ -271,7 +274,7 @@ class Book extends BookWrite {
 					bid = ?";
 
 		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(1, $this->id);
+		$stmt->bindParam(1, $bid);
 		$stmt->execute();
 
 		$num = 0;
@@ -345,6 +348,8 @@ class Book extends BookWrite {
 					{$order}
 				{$lim}";
 
+		//echo $query.'~';
+
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
 
@@ -367,7 +372,7 @@ class Book extends BookWrite {
 					$dno = explode('-', $dno);
 					$row['num_in_storage'] += $dno[1];
 				}*/
-				$row['num_in_storage'] = $this->countDonationsBookNum();
+				$row['num_in_storage'] = $this->countDonationsBookNum($row['id']);
 			}
 
 			if ($searchInStorage) {
@@ -508,7 +513,7 @@ class Book extends BookWrite {
 
 			// des
 			$row['des'] = content($row['des']);
-			$row['download'] = explode('|', str_replace('&amp;', '&', $row['download']));
+			$row['download'] = array_values(array_filter(explode('|', str_replace('&amp;', '&', $row['download']))));
 
 			// is published
 			if ($row['published'] == 1) {
@@ -733,7 +738,6 @@ class Book extends BookWrite {
 	}
 
 	function changeBookDonation ($bid, $stt) {
-		$donated = $this->getDonated($bid);
 		$query = "UPDATE
 					books
 				SET
@@ -743,7 +747,7 @@ class Book extends BookWrite {
 
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(':stt', $stt);
-		$stmt->bindParam(':id', $id);
+		$stmt->bindParam(':id', $bid);
 		if ($stmt->execute()) return true;
 		else return false;
 	}

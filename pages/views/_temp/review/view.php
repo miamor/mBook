@@ -8,6 +8,7 @@
 			</a>
 		</div>
 		<div class="feed-content col-lg-11 no-padding-right feed-rv">
+			<?php if ($highlight) echo '<div class="feed-highlight" title="Highlighted review"></div>' ?>
 			<div class="feed-main feed-rv-main box box-review">
 				<div class="box-header feed-main-head feed-rv-head">
 					<div class="feed-ratings right ratings text-lg text-warning">
@@ -20,6 +21,7 @@
 					<a href="<?php echo $author['link'] ?>"><?php echo $author['name'] ?></a> đã thêm 1 <a href="<?php echo $link ?>">review</a> cho cuốn sách
 					<?php if ($book['id']) echo '<a href="'. $book['link'] .'">'. $book['title'] .'</a>';
 					else echo '<a href="#">'.$title.'</a>'; ?>
+					<a class="feed-edit" href="?mode=edit"><i class="fa fa-pencil"></i> Edit</a>
 				</div>
 				<div class="box-body feed-main-content feed-rv-content">
 					<div class="feed-rv-thumb">

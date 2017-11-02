@@ -13,7 +13,7 @@ $book = new Book();
 
 $page_title = "Kho sách lưu trữ";
 
-$stmt = $book->readAll('','','','','','','',1,true);
+$stmt = $book->readAll('','','','','','','',1,1,true);
 $_List = $book->all_list;
 
 if ($do) include 'system/'.$page.'/'.$do.'.php';

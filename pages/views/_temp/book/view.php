@@ -4,12 +4,13 @@
 		<?php if ($page == 'write') { ?>
 			<a class="btn btn-default pull-right" href="<?php echo $config->wLink ?>?mode=new"><span class="fa fa-plus"></span> Chủ đề mới</a>
 		<?php }
-		if ($uid === $config->u || $config->me['is_mod'] === 1) { ?>
-			<a class="btn btn-default pull-right" href="<?php echo str_replace('/book/', '/write/', $link) .'/?mode=edit' ?>"><span class="fa fa-pencil"></span> Sửa bài viết</a>
+		if ($uid == $config->u || $added_uid == $config->u || $config->me['is_mod'] == 1) { ?>
+			<a class="btn btn-default pull-right" href="<?php echo '?mode=edit' ?>"><span class="fa fa-pencil"></span> Sửa bài viết</a>
 		<?php } ?>
 		</div>
 		<h2 class="book-title">
-			<?php echo $title ?>
+			<?php echo $title;
+			if ($show == 0) echo '<span class="label label-warning book-not-show" title="Chủ đề này chưa được kiểm duyệt. Những người khác sẽ không thể xem được.">Chưa được kiểm duyệt</div>' ?>
 		</h2>
 		<div class="col-lg-<?php echo ($ratingsNum > 0) ? 4 : 3 ?> book-left-col no-padding-left">
 			<?php include 'v.sidebar.php'; ?>
@@ -51,4 +52,3 @@
 
 	<div class="clearfix"></div>
 </div>
-

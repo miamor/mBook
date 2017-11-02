@@ -82,7 +82,7 @@ if ($num <= 0) {
 			<div class="col-lg-2 one-book-title">
 				Title
 			</div>
-			<div class="col-lg-4 one-book-preview">
+			<div class="col-lg-5 one-book-preview">
 				Preview
 			</div>
 			<div class="col-lg-2 one-book-stat">
@@ -112,6 +112,8 @@ foreach ($_List as $bK => $bO) {
 			<a class="gensmall" href="'.PAGE_URL.'/review/'.$bO['id'].'">('.$bO['ratingsNum'].' reviews)</a>
 		</div>';
 
+	if ($bO['highlight']) $highlight = '<div class="feed-highlight" title="Highlighted review"></div>';
+	else $highlight = '';
 	$ar[] = '<div class="one-book-row" data-id="'.$bO['id'].'">
 		<div class="col-lg-1 no-padding one-book-actions">
 			<label class="checkbox left" style="margin:1px 5px 0 0">
@@ -119,6 +121,7 @@ foreach ($_List as $bK => $bO) {
 			</label>
 			<a class="one-book-edit" href="'.$bO['link'].'"><i class="fa fa-cog"></i></a>
 			<span class="one-book-status" data-stt="'.$bO['show'].'"></span>
+			'.$highlight.'
 		</div>
 		<div class="col-lg-2 one-book-author">
 			<a href="'.$bO['author']['link'].'">'.$bO['author']['name'].'</a>
@@ -126,8 +129,8 @@ foreach ($_List as $bK => $bO) {
 		<div class="col-lg-2 one-book-title">
 			'.$bO['title'].' '.$createLink.'
 		</div>
-		<div class="col-lg-4 one-book-preview">
-			'.substr(htmlentities($bO['content']), 0, 100).'
+		<div class="col-lg-5 one-book-preview">
+			'.substr(htmlentities(strip_tags($bO['content'])), 0, 200).'
 		</div>
 		<div class="col-lg-2 one-book-stat">
 			'.$stat.'

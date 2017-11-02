@@ -59,7 +59,8 @@ if ($n) {
 if ($do) include 'pages/system/write/'.$do.'.php';
 else if ($mode) {
 //	if ($uid === $config->u || $config->me['is_mod'] === 1)
-	include 'views/book/'.$mode.'.php';
+	if (is_file('pages/views/book/'.$mode.'.php')) include 'pages/views/book/'.$mode.'.php';
+	else include 'error.php';
 } else if ($n) {
 	if ($book->id) {
 		include 'views/'.$page.'/view.php';

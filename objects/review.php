@@ -7,6 +7,21 @@ class Review extends Config {
 		parent::__construct();
 	}
 
+	function countByFbID ($fbID) {
+		$query = "SELECT
+					id
+				FROM
+					".$this->table_name."
+				WHERE
+					from_fb_id = ?";
+
+		$stmt = $this->conn->prepare($query);
+		$stmt->bindParam(1, $fbID);
+		$stmt->execute();
+
+		return $stmt->rowCount();
+	}
+
 	function upload ($file, $isFront = true) {
 		$ar = explode('.', $file['name']);
 		$ext = end($ar);
@@ -28,24 +43,43 @@ class Review extends Config {
 	function create () {
 		$thumbURL = (isset($this->thumbPath) && $this->thumbPath) ? str_replace(MAIN_PATH, MAIN_URL, $this->thumbPath) : '';
 
+		$thumbq = ($thumbURL ? ", thumb = ?" : '');
+
 		$query = "INSERT INTO
 					" . $this->table_name . "
 				SET
-					content = ?, rate = ?, iid = ?, uid = ?, to_fb = ?, thumb = ?, title = ?, `show` = ?";
+					content = ?, rate = ?, iid = ?, uid = ?, to_fb = ?, title = ?, `show` = ?, created = ?, modified = ?, highlight = ?, from_fb_id = ? {$thumbq}";
 
 		$stmt = $this->conn->prepare($query);
 
 		$this->content = content($this->content);
+		if (!$this->created) $this->created = $this->getTimestamp();
+		if (!$this->toFB) $this->toFB = 0;
+		if (!$this->iid) $this->iid = 0;
+		if (!$this->status) $this->status = 0;
+
+		if ($this->from_fb_id) {
+			$__u = $this->uID;
+		} else {
+			$__u = $this->u;
+		}
+
+		echo $this->content.'~'.$this->rate.'~'.$this->iid.'~'.$this->u.'~'.$this->toFB.'~'.$thumbURL.'~'.$this->title.'~'.$this->status.'~'.$this->created.'~'.$this->highlight.'~'.$this->from_fb_id;
+		echo $query;
 
 		// bind values
 		$stmt->bindParam(1, $this->content);
 		$stmt->bindParam(2, $this->rate);
 		$stmt->bindParam(3, $this->iid);
-		$stmt->bindParam(4, $this->u);
+		$stmt->bindParam(4, $__u);
 		$stmt->bindParam(5, $this->toFB);
-		$stmt->bindParam(6, $thumbURL);
-		$stmt->bindParam(7, $this->title);
-		$stmt->bindParam(8, $this->status);
+		$stmt->bindParam(6, $this->title);
+		$stmt->bindParam(7, $this->status);
+		$stmt->bindParam(8, $this->created);
+		$stmt->bindParam(9, $this->created);
+		$stmt->bindParam(10, $this->highlight);
+		$stmt->bindParam(11, $this->from_fb_id);
+		if ($thumbURL) $stmt->bindParam(12, $thumbURL);
 
 		//echo $this->content.'~'.$this->iid.'~'.$this->rate.'~'.$this->u;
 		if ($stmt->execute()) {
@@ -54,23 +88,30 @@ class Review extends Config {
 			$this->id = $newPost['id'];
 			$this->link = $newPost['link'];
 
+			print_r($newPost);
+
 			$type = "review";
 			$q = "INSERT INTO posts SET type = ?, iid = ?, uid = ?, gid = ?";
 			$st = $this->conn->prepare($q);
 			if (!isset($this->gid)) $this->gid = 0;
+
 			// bind values
 			$st->bindParam(1, $type);
 			$st->bindParam(2, $this->id);
-			$st->bindParam(3, $this->u);
+			$st->bindParam(3, $__u);
 			$st->bindParam(4, $this->gid);
 			if ($st->execute()) {
+				$coinsAdded = (!$this->toFB) ? COINS_NEW_REVIEW : (COINS_NEW_REVIEW + COINS_NEW_REVIEW_TO_FACEBOOK);
 				// add coin for adding new review
-				$this->addCoin(COINS_NEW_REVIEW);
-				// add noti for user who writes this
-				$coinsAdded = ($this->toFB) ? COINS_NEW_REVIEW : COINS_NEW_REVIEW + COINS_NEW_REVIEW_TO_FACEBOOK;
+				$this->addCoin($coinsAdded);
+
 				if ($this->toFB) {
 					$this->addCoin(COINS_NEW_REVIEW_TO_FACEBOOK);
 				}
+
+				if ($this->from_fb_id) $this->bookTitle = $this->title;
+
+				// add noti for user who writes this
 				$valAr = array(
 						'type' => 'new-review',
 						'iid' => $this->id,
@@ -80,7 +121,7 @@ class Review extends Config {
 									'coins_added' => $coinsAdded
 								), JSON_UNESCAPED_UNICODE)
 					);
-				$this->addNoti($valAr);
+				$this->addNoti($valAr, $__u);
 				return true;
 			}
 		}
@@ -621,7 +662,8 @@ class Review extends Config {
 					title = :title,
 					iid = :iid,
 					`show` = :show,
-					modified  = :modified
+					modified  = :modified,
+					highlight = :highlight
 				WHERE
 					id = :id";
 
@@ -634,6 +676,7 @@ class Review extends Config {
 		$stmt->bindParam(':iid', $this->iid);
 		$stmt->bindParam(':modified', $this->timestamp);
 		$stmt->bindParam(':show', $this->status);
+		$stmt->bindParam(':highlight', $this->highlight);
 		$stmt->bindParam(':id', $this->id);
 
 		$this->link = $this->rLink.'/'.$this->id;
@@ -642,5 +685,50 @@ class Review extends Config {
 		else return false;
 	}
 
+
+	function crawlFromFb ($group_id) {
+		/* PHP SDK v5.0.0 */
+		/* make the API call */
+		try {
+		  // Returns a `Facebook\FacebookResponse` object
+		  $response = $this->FB->get(
+		    '/'.$group_id.'/feed',
+		    $_SESSION['fb_access_token']
+		  );
+		} catch(Facebook\Exceptions\FacebookResponseException $e) {
+		  echo 'Graph returned an error: ' . $e->getMessage();
+		  exit;
+		} catch(Facebook\Exceptions\FacebookSDKException $e) {
+		  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+		  exit;
+		}
+
+		$pagesEdge = $response->getGraphEdge();
+
+		// Only grab 5 pages
+		$pageCount = 0;
+		$posts = array();
+
+		do {
+			foreach ($pagesEdge as $oneEdge) {
+				$oneF = $oneEdge->asArray();
+				$found = preg_match("/\[REVIEW\](.*?)\(([1-5])\*\)[\r\n]+/", $oneF['message'], $matches);
+				//print_r($matches);
+				if ($found) {
+					$bb = $matches[1];
+					$oneF['book'] = trim($matches[1]);
+					$oneF['content'] = trim(explode($matches[0], $oneF['message'])[1]);
+					$oneF['rate'] = $matches[2];
+				}
+				$oneF['created'] = $oneF['updated_time']->format('Y-m-d H:i:s');
+				//print_r($oneF);
+		        $posts[] = $oneF;
+		        $this->fb_post[$group_id][$oneF['id']] = $oneF;
+			}
+		} while ($pagesEdge = $this->FB->next($pagesEdge));
+		//echo json_encode($friends);
+
+		return $this->fb_post;
+	}
 
 }

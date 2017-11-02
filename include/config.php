@@ -28,6 +28,9 @@ define('COINS_NEW_REVIEW', 5);
 define('COINS_NEW_CHAPTER', 5);
 define('COINS_NEW_REVIEW_TO_FACEBOOK', 5);
 
+define('COINS_DONATE_ONE_BOOK', 10);
+define('COINS_BORROW_RETURN', 2);
+
 define('FB_APP_ID', '227904834368737');
 define('FB_APP_SECRET', '7a2ea311a4ca8f5263a71cf326763d38');
 
@@ -192,6 +195,17 @@ class Config {
 			$row['followingsNum'] = count($row['followings']);
 		}
 		return $row;
+	}
+
+	public function showPages ($pStart, $records, $pages, $activeSt) {
+		$pageHTML = '';
+		for ($p = $pStart; $p <= $pages; $p++) {
+			$st = $p*$records;
+			$cls = 'paginate_button';
+			if ($activeSt == $st) $cls = 'paginate_button active';
+			$pageHTML .= '<li class="'.$cls.'"><a href="?start='.$st.'&records='.$records.'">'.($p+1).'</a></li>';
+		}
+		return $pageHTML;
 	}
 
 	function getUserReviewsNum ($u = null) {

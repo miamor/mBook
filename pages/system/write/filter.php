@@ -12,15 +12,18 @@ $start = isset($_POST['start']) ? $_POST['start'] : 0;
 $records = isset($_POST['records']) ? $_POST['records'] : 24;
 $keyword = isset($_POST['keyword']) ? $_POST['keyword'] : null;
 $in_storage = isset($_POST['in_storage']) ? $_POST['in_storage'] : -1;
+$order = isset($_POST['order']) ? $_POST['order'] : 'modified';
+$order_sort = isset($_POST['order_sort']) ? $_POST['order_sort'] : 'desc';
+
 $authorAr = array();
 if (isset($_POST['author'])) {
 	foreach ($_POST['author'] as $oneAu)
 		$authorAr[] = $oneAu;
 }
 
-$stmt = $book->readAll('', $genresAr, $authorAr, '', $start, $records, $keyword, $in_storage);
+$stmt = $book->readAll('', $genresAr, $authorAr, "{$order} {$order_sort}", $start, $records, $keyword, 1, $in_storage);
 $_List = $book->all_list;
-$num = $book->countAll('', $genresAr, $authorAr, $keyword);
+$num = $book->countAll('', $genresAr, $authorAr, $keyword, 1, $in_storage);
 //$num = count($_List);
 
 $pageHTML = '';

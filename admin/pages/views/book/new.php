@@ -1,5 +1,5 @@
 <?php
-$page_title = "Tạo eBook mới";
+$page_title = "Add new book";
 
 include '../objects/genre.php';
 $genre = new Genre();

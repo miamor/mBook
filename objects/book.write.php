@@ -229,7 +229,8 @@ class BookWrite extends Config {
 					author = :author,
 					des = :des,
 					`show` = :show,
-					download = :download
+					download = :download,
+					published = :published
 				WHERE
 					id = :id";
 
@@ -252,6 +253,7 @@ class BookWrite extends Config {
 		$stmt->bindParam(':download', $this->download);
 		$stmt->bindParam(':des', $this->des);
 		$stmt->bindParam(':show', $this->status);
+		$stmt->bindParam(':published', $this->published);
 		$stmt->bindParam(':id', $this->id);
 
 		// execute the query

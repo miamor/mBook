@@ -1,5 +1,6 @@
 <div class="feed-one-item feed-item-review">
 	<div class="feed-content feed-rv">
+		<?php if ($highlight) echo '<div class="feed-highlight" title="Highlighted review"></div>' ?>
 		<div class="box box-review feed-main col-lg-8 feed-rv-main">
 			<div class="box-header feed-main-head feed-rv-head">
 				<div class="feed-ratings right ratings text-lg text-warning">
@@ -12,6 +13,7 @@
 				<?php echo '<a href="'.$link.'" title="Xem đầy đủ">#review</a>' ?>
 				<i class="fa fa-caret-right to-caret"></i>
 				<?php echo ($iid) ? '<a href="'.$book['link'].'">'. $book['title'] .'</a>' : $title ?>
+				<a class="feed-edit" href="?mode=edit"><i class="fa fa-pencil"></i> Edit</a>
 			</div>
 			<div class="box-body feed-main-content feed-rv-content">
 				<?php echo $content_feed ?>

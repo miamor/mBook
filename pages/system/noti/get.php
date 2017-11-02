@@ -52,6 +52,11 @@ foreach ($notiList as $oneNoti) {
 		echo 'Cảm ơn bạn đã mượn và trả sách. Bạn vừa được cộng thêm '.$img.'<b>'.$content['coins_added'].'</b> vì tham gia chương trình chia sẻ sách của hệ thống.
 		<div class="note">Bạn có thể viết <a class="noti-post-link" href="'.$config->rLink.'?mode=new">review</a> cho cuốn sách vừa mượn để nhận thêm điểm. <a class="noti-post-link" href="'.$config->rLink.'?mode=new"><i class="fa fa-toggle-right"></i></a></div>';
 	}
+	else if ($type == 'add-coin-donation') {
+		$img = '<img style="margin-top:-6px" src="'.IMG.'/silk/coins.png"/>';
+		$icon = 'check';
+		echo 'Bạn vừa được cộng thêm '.$img.'<b>'.$content['coins_added'].'</b> vì đóng góp '.$content['donated_num'].' cuốn <a href="'.$config->bLink.'/'.$post_id.'#in_storage">sách</a> cho hệ thống.';
+	}
 	else if ($type == 'new-chapter') {
 		$img = '<img style="margin-top:-6px" src="'.IMG.'/silk/coins.png"/>';
 		$icon = 'check';

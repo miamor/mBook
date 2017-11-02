@@ -1,11 +1,11 @@
 <form id="formFilter" class="col-lg-2 filters no-padding">
 	<h3>Lọc kết quả</h3>
 	<div class="book-search" id="bsearch">
-		<h4 class="filter-header with-border">Tìm theo từ khóa</h4>
+		<h4 class="filter-header">Tìm theo từ khóa</h4>
 		<input class="form-control btit" type="text" id="book-search-title" name="keyword" autocomplete="off" placeholder="Search by title"/>
 	</div>
 	<div class="filter-genres">
-		<h4 class="filter-header with-border">Thể loại</h4>
+		<h4 class="filter-header">Thể loại</h4>
 		<div class="filter-body">
 			<select name="genres[]" multiple class="form-control chosen-select">
 		<?php foreach ($genList as $gO) {
@@ -15,7 +15,7 @@
 		</div>
 	</div>
 	<div class="filter-author">
-		<h4 class="filter-header with-border">Tác giả</h4>
+		<h4 class="filter-header">Tác giả</h4>
 		<div class="filter-body">
 			<select name="author[]" multiple class="form-control chosen-select">
 		<?php foreach ($auList as $aO) {
@@ -24,8 +24,26 @@
 			</select>
 		</div>
 	</div>
+	<div class="filter-author">
+		<h4 class="filter-header">Sắp xếp</h4>
+		<div class="filter-body">
+			<div class="col-lg-6 no-padding">
+				<select name="order" class="form-control">
+					<option value="title">Tên</option>
+					<option value="modified" selected>Thời gian</option>
+				</select>
+			</div>
+			<div class="col-lg-6 no-padding">
+				<select name="order_sort" class="form-control">
+					<option value="asc" selected>Tăng dần</option>
+					<option value="desc" selected>Giảm dần</option>
+				</select>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
 <!--	<div class="filter-free-download">
-		<h4 class="filter-header with-border">Free download</h4>
+		<h4 class="filter-header">Free download</h4>
 		<div class="filter-body">
 			<label class="radio">
 				<input type="radio" value="0" checked name="free_download"/> Everything
@@ -36,7 +54,7 @@
 		</div>
 	</div>
 	<div class="filter-status">
-		<h4 class="filter-header with-border">Tình trạng</h4>
+		<h4 class="filter-header">Tình trạng</h4>
 		<div class="filter-body">
 			<label class="radio">
 				<input type="radio" value="1" name="status"/> Đã hoàn thành
@@ -47,7 +65,7 @@
 		</div>
 	</div>-->
 	<div class="filter-status">
-		<h4 class="filter-header with-border">Tình trạng</h4>
+		<h4 class="filter-header">Tình trạng</h4>
 		<div class="filter-body">
 			<label class="radio">
 				<input type="radio" value="1" name="in_storage"/> Có trong kho sách

@@ -50,7 +50,7 @@ $config->addJS('dist', 'main.js'); ?>
 			<ul class="items-list">
 				<li class="one-item <?php if ($page == 'home') echo 'active' ?>" id="home"><a href="<?php echo MAIN_URL ?>">Feed</a></li>
 				<li class="one-item <?php if ($page == 'book') echo 'active' ?>" id="book">
-					<a href="<?php echo MAIN_URL ?>/book">eBook</a>
+					<a href="<?php echo MAIN_URL ?>/book">Thư viện</a>
 				</li>
 				<li class="one-item <?php if ($page == 'storage') echo 'active' ?>" id="storage">
 					<a href="<?php echo MAIN_URL ?>/storage">Kho sách</a>

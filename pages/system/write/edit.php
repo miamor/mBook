@@ -10,12 +10,24 @@ if ($title) {
 			echo '[type]error[/type][content]One topic with this title has already existed. Please choose another title if this is different from <a href="'.$theBook['link'].'">'.$title.'</a>[/content]';
 			$ok = false;
 		}
-	} 
-	
+	}
+
 	if ($ok == true) {
 		$book->title = $title;
 		$book->des = $des = isset($_POST['des']) ? $_POST['des'] : null;
-		$book->cover = $cover = isset($_POST['cover']) ? $_POST['cover'] : null;
+		$book->thumb = $thumb = isset($_POST['cover']) ? $_POST['cover'] : null;
+		$book->status = $book->show;
+		$book->published = $published = isset($_POST['published']) ? $_POST['published'] : 0;
+
+		if ($book->type == 1) $book->author = $config->u;
+		else {
+			if (isset($_POST['author']) && $_POST['author'] != 0) {
+				$author = $_POST['author'];
+			} else {
+				$author = (isset($_POST['author_text'])) ? ($_POST['author_text']) : null;
+			}
+			$book->author = $author;
+		}
 
 		$_genres = array();
 		if (isset($_POST['genres'])) {
@@ -28,8 +40,10 @@ if ($title) {
 		if ($des && $_genres) {
 			$update = $book->update();
 			if ($update) {
-				$book->link = $config->bLink.'/'.$book->link;
-				echo '[type]success[/type][dataID]'.$book->link.'[/dataID][content]Topic updated successfully. Redirecting to <a href="'.$book->link.'">'.$title.'</a>...[/content]';
+				$book->link = $book->link;
+				if ($book->type == 1) $tt = 'Topic';
+				else $tt = 'Book';
+				echo '[type]success[/type][dataID]'.$book->link.'[/dataID][content]'.$tt.' updated successfully. Redirecting to <a href="'.$book->link.'">'.$title.'</a>...[/content]';
 			} else echo '[type]error[/type][content]Oops! Something went wrong with our system. Please contact the administrators for furthur help.[/content]';
 		} else echo '[type]error[/type][content]Missing parameters![/content]';
 	}

@@ -73,8 +73,6 @@ if (! $accessToken->isLongLived()) {
 	$_ar['token'] = $accessToken->getValue();
 }
 
-$_SESSION['fb_access_token'] = (string) $accessToken;
-
 }
 else {
 	$accessToken = $login->getUserToken();
@@ -82,6 +80,8 @@ else {
 
 
 if ($accessToken) {
+	$_SESSION['fb_access_token'] = (string) $accessToken;
+
 	//redirect to retrieving data page
 
 	// Retrieve user info
@@ -107,6 +107,8 @@ if ($accessToken) {
 	$login->fb_token = $accessToken;
 	$login->name = $name = $user['name'];
 	$login->username = $uname = encodeURL($name, '.');
+
+	//echo $accessToken.'~'.$_SESSION['fb_access_token'];
 
 	$login->avatar = $avatar;
 	if ($login->loginFb()) {
